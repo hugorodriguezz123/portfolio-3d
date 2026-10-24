@@ -1,0 +1,822 @@
+{
+  "languages": {
+    "es": "Español",
+    "en": "English"
+  },
+  "a11y": {
+    "skip": "Saltar al contenido",
+    "mainNav": "Secciones de la oficina",
+    "language": "Cambiar idioma",
+    "toggleTheme": "Cambiar tema",
+    "menu": "Abrir menú",
+    "inicio": "JHS Software Solutions, volver al inicio",
+    "escena": "Oficina 3D de JHS Software Solutions. Usa el menú o las flechas del teclado para recorrerla.",
+    "pad": "Moverse por la oficina",
+    "padArriba": "Pantalla central: proyectos",
+    "padAbajo": "Taller: 3D e IoT",
+    "padIzq": "Pantalla izquierda: servicios",
+    "padDer": "Estante y sala: nosotros",
+    "padIzqServicios": "Servicio anterior",
+    "padDerServicios": "Servicio siguiente",
+    "padIzqNosotros": "Perfil anterior",
+    "padDerNosotros": "Perfil siguiente",
+    "padIzqProyectos": "Proyecto anterior",
+    "padDerProyectos": "Proyecto siguiente",
+    "flechaIzq": "Flecha izquierda",
+    "flechaArriba": "Flecha arriba",
+    "flechaDer": "Flecha derecha",
+    "flechaAbajo": "Flecha abajo",
+    "teclaCtrl": "Tecla Control o Comando",
+    "teclaEspacio": "Barra espaciadora",
+    "teclaX": "Tecla X",
+    "areas": "Áreas",
+    "tecnologias": "Tecnologías"
+  },
+  "nav": {
+    "home": "Inicio"
+  },
+  "home": {
+    "meta": {
+      "title": "Desarrollo web, IA, IoT y diseño 3D | JHS Software Solutions",
+      "description": "Desarrollo web y mobile a la medida, despliegue en la nube, inteligencia artificial, IoT, diseño mecánico y 3D. Recorre nuestra oficina virtual."
+    }
+  },
+  "top": {
+    "contacto": "Contacto"
+  },
+  "portada": {
+    "ceja": "Estudio de tecnología e ingeniería",
+    "lead": "Llevamos tu idea de la pantalla al mundo real: desarrollamos software, inteligencia artificial y dispositivos conectados, y diseñamos las piezas y modelos 3D que los hacen posibles. Todo con un mismo equipo.",
+    "entrar": "Entrar a la oficina",
+    "contacto": "Cuéntanos tu proyecto",
+    "servicios": [
+      "Desarrollo web",
+      "Desarrollo mobile",
+      "Nube",
+      "Inteligencia artificial",
+      "IoT",
+      "Diseño 3D",
+      "Diseño mecánico"
+    ],
+    "bajar": "Desliza para entrar a la oficina",
+    "fotoAlt": "Los fundadores de JHS Software Solutions",
+    "cargando": "Cargando la oficina 3D",
+    "error": "Tu navegador no pudo mostrar la oficina 3D.",
+    "sin3d": "Ver el contenido sin 3D"
+  },
+  "menu": {
+    "items": [
+      {
+        "id": "servicios",
+        "label": "Servicios",
+        "tecla": "←",
+        "teclaAria": "a11y.flechaIzq"
+      },
+      {
+        "id": "proyectos",
+        "label": "Proyectos",
+        "tecla": "↑",
+        "teclaAria": "a11y.flechaArriba"
+      },
+      {
+        "id": "tecnologias",
+        "label": "Tecnologías",
+        "tecla": "Ctrl/⌘",
+        "teclaAria": "a11y.teclaCtrl"
+      },
+      {
+        "id": "nosotros",
+        "label": "Nosotros",
+        "tecla": "→",
+        "teclaAria": "a11y.flechaDer"
+      },
+      {
+        "id": "taller",
+        "label": "Taller 3D e IoT",
+        "tecla": "↓",
+        "teclaAria": "a11y.flechaAbajo"
+      },
+      {
+        "id": "contacto",
+        "label": "Contacto",
+        "tecla": "Espacio",
+        "teclaAria": "a11y.teclaEspacio"
+      },
+      {
+        "id": "mapa",
+        "label": "Ubicación",
+        "tecla": "X",
+        "teclaAria": "a11y.teclaX"
+      }
+    ],
+    "vista": "Vista general",
+    "inicio": "Inicio",
+    "todas": "Todas las secciones",
+    "servicios": {
+      "titulo": "Servicios",
+      "sub": "← → para cambiar de servicio"
+    },
+    "proyectos": {
+      "titulo": "Proyectos",
+      "sub": "← → para cambiar de proyecto"
+    }
+  },
+  "pista": {
+    "antes": "Haz clic en",
+    "objetos": [
+      "una pantalla",
+      "el escritorio",
+      "el estante",
+      "la mesa",
+      "el mapa"
+    ],
+    "despues": "o usa",
+    "teclas": "← ↑ → ↓ · Ctrl · Espacio · X"
+  },
+  "hud": {
+    "abrir": "abrir",
+    "nombres": {
+      "servicios": "Servicios",
+      "proyectos": "Proyectos",
+      "tecnologias": "Tecnologías",
+      "nosotros": "Nosotros",
+      "taller": "Taller 3D e IoT",
+      "contacto": "Contacto"
+    }
+  },
+  "servicios": {
+    "titulo": "Servicios",
+    "cab": "Servicio",
+    "lugar": "Pantalla izquierda",
+    "queHacemos": "Qué hacemos",
+    "cotizar": "Cotizar este servicio",
+    "anterior": "← Anterior",
+    "siguiente": "Siguiente →",
+    "items": [
+      {
+        "id": "web",
+        "nombre": "Desarrollo web",
+        "titulo": "Desarrollo web a la medida",
+        "texto": "Construimos desde landing pages hasta plataformas web avanzadas con API, base de datos y eventos en segundo plano, diseñadas y programadas a la medida de tu negocio.",
+        "lista": [
+          "Landing pages y sitios corporativos listos para buscadores",
+          "Aplicaciones web y paneles administrativos a la medida",
+          "APIs, bases de datos e integraciones con tus sistemas",
+          "Eventos y tareas en segundo plano: correos, reportes y sincronizaciones",
+          "Tiendas en línea y experiencias 3D interactivas, como esta oficina"
+        ],
+        "nota": "Te entregamos el código fuente y el proyecto completo. El código es tuyo: no nos adueñamos de él.",
+        "chips": [
+          "Frontend",
+          "Backend y APIs",
+          "Bases de datos",
+          "Segundo plano"
+        ],
+        "video": "/videos/servicios/web.mp4"
+      },
+      {
+        "id": "mobile",
+        "nombre": "Desarrollo mobile",
+        "texto": "Creamos aplicaciones móviles para Android e iOS, desde apps sencillas para presentar tu marca hasta apps avanzadas con API, base de datos y eventos en segundo plano.",
+        "lista": [
+          "Apps informativas y de catálogo para tu marca",
+          "Apps a la medida conectadas a tu API y base de datos",
+          "Notificaciones, sincronización y tareas en segundo plano",
+          "Acompañamiento para publicar en Google Play y App Store"
+        ],
+        "nota": "Te entregamos el código fuente y el proyecto completo. El código es tuyo: no nos adueñamos de él.",
+        "chips": [
+          "Android",
+          "iOS",
+          "APIs",
+          "Notificaciones"
+        ],
+        "video": "/videos/servicios/mobile.mp4"
+      },
+      {
+        "id": "nube",
+        "nombre": "Despliegue en la nube",
+        "texto": "Ponemos tu aplicación en línea y la mantenemos estable: configuramos servidores, dominios y bases de datos en la nube para que tu proyecto esté disponible, seguro y listo para crecer.",
+        "lista": [
+          "Servidores, dominios y certificados SSL",
+          "Bases de datos y almacenamiento en la nube",
+          "Despliegue automático con cada cambio (CI/CD)",
+          "Monitoreo, respaldos y escalado según la demanda"
+        ],
+        "chips": [
+          "Servidores",
+          "Contenedores",
+          "CI/CD",
+          "Monitoreo"
+        ],
+        "video": "/videos/servicios/nube.mp4"
+      },
+      {
+        "id": "ia",
+        "nombre": "Inteligencia artificial",
+        "texto": "Ponemos la IA a trabajar en tu operación: desde automatizaciones y asistentes personalizados hasta análisis de datos, modelos predictivos y redes neuronales entrenadas para tu caso.",
+        "lista": [
+          "Automatización de procesos, tareas y documentos con IA",
+          "Asistentes personales y chatbots con la información de tu empresa",
+          "Análisis de datos y modelos predictivos",
+          "Redes neuronales y visión artificial a la medida"
+        ],
+        "chips": [
+          "Automatización",
+          "Asistentes IA",
+          "Modelos predictivos",
+          "Redes neuronales"
+        ],
+        "video": "/videos/servicios/ia.mp4"
+      },
+      {
+        "id": "iot",
+        "nombre": "IoT",
+        "titulo": "IoT · Internet de las cosas",
+        "texto": "Del sensor al tablero: desarrollamos el hardware, el firmware y la plataforma para que monitorees y controles tus equipos en tiempo real, desde cualquier lugar.",
+        "lista": [
+          "Prototipos de dispositivos con sensores y actuadores",
+          "Firmware para microcontroladores",
+          "Tableros de monitoreo y alertas en la nube",
+          "Integración con tus sistemas y equipos existentes"
+        ],
+        "chips": [
+          "Sensores",
+          "Firmware",
+          "Nube",
+          "Tableros"
+        ],
+        "video": "/videos/servicios/iot.mp4"
+      },
+      {
+        "id": "d3d",
+        "nombre": "Diseño 3D",
+        "texto": "Modelamos productos, espacios y piezas en 3D para presentar, validar y fabricar: desde el render para tu catálogo hasta la experiencia interactiva en tu sitio web.",
+        "lista": [
+          "Modelado y render de productos y espacios",
+          "Escenas 3D interactivas para web",
+          "Modelos listos para impresión 3D",
+          "Animaciones y recorridos virtuales"
+        ],
+        "chips": [
+          "Modelado",
+          "Render",
+          "Web 3D",
+          "Impresión 3D"
+        ],
+        "video": "/videos/servicios/d3d.mp4"
+      },
+      {
+        "id": "mecanico",
+        "nombre": "Diseño mecánico",
+        "texto": "Diseñamos piezas y mecanismos con criterio de ingeniería, los validamos y te entregamos planos y prototipos listos para producción.",
+        "lista": [
+          "Diseño CAD de piezas, ensambles y mecanismos",
+          "Planos de fabricación y especificaciones técnicas",
+          "Análisis y validación del diseño",
+          "Prototipado rápido con impresión 3D"
+        ],
+        "chips": [
+          "CAD",
+          "Planos",
+          "Simulación",
+          "Prototipos"
+        ],
+        "video": "/videos/servicios/mecanico.mp4"
+      }
+    ],
+    "entrega": "Entrega"
+  },
+  "proyectos": {
+    "titulo": "Proyectos",
+    "cab": "Proyecto",
+    "lugar": "Pantalla central",
+    "queHicimos": "Qué hicimos",
+    "area": "Área",
+    "cliente": "Cliente",
+    "anio": "Año",
+    "sitio": "Sitio",
+    "conjunto": "Sistema",
+    "anterior": "← Anterior",
+    "siguiente": "Siguiente →",
+    "quiero": "Quiero algo así",
+    "items": [
+      {
+        "nombre": "Oficina virtual 3D",
+        "area": "Desarrollo web · Diseño 3D",
+        "cliente": "JHS Software Solutions, proyecto propio",
+        "anio": "[AÑO]",
+        "texto": "Este mismo sitio: una oficina 3D que se recorre desde el navegador, con cámara guiada, personajes animados que caminan esquivando los muebles y secciones que se abren al hacer clic sobre los objetos.",
+        "lista": [
+          "Modelado, texturas e iluminación de toda la oficina",
+          "Personajes animados que eligen su camino entre los muebles",
+          "Optimización para que cargue y corra en el navegador",
+          "Navegación con clic, scroll y teclado"
+        ],
+        "chips": [
+          "Web 3D",
+          "Modelado 3D",
+          "Animación",
+          "Optimización"
+        ],
+        "servicio": "web"
+      },
+      {
+        "nombre": "SARA IoT",
+        "area": "IoT · Desarrollo web · Nube",
+        "cliente": "Proyectos comunitarios rurales (sistema SARA)",
+        "anio": "2026",
+        "texto": "Servicio IoT que monitorea en tiempo real las variables climáticas de comunidades rurales y apoya la gestión de sus proyectos de infraestructura. Una estación meteorológica envía sus lecturas a una API en la nube, y una plataforma web las convierte en mapas, alertas, históricos y reportes. Funciona como una capa adjunta al sistema SARA, sin afectar al resto del sistema.",
+        "lista": [
+          "Estación meteorológica Ecowitt conectada por webhook: viento, lluvia, radiación UV, temperatura y humedad",
+          "API REST con Django y procesamiento en segundo plano con Celery y Redis: ninguna lectura se pierde",
+          "Plataforma web en React con mapa de estaciones, alertas, comparación de zonas y reportes en PDF y CSV",
+          "Tres roles con permisos propios: administrador, operador de comunidad y consultor externo",
+          "Desplegado en AWS y probado: 1510 peticiones sin errores, con respuesta de menos de 140 ms (p95)"
+        ],
+        "chips": [
+          "IoT",
+          "Django REST",
+          "React + TypeScript",
+          "PostgreSQL",
+          "Celery + Redis",
+          "AWS"
+        ],
+        "servicio": "iot",
+        "video": "/videos/sara-iot.mp4",
+        "url": "https://saraiot.com"
+      },
+      {
+        "nombre": "Gauss · Centro de Energía Vital",
+        "menu": "Gauss",
+        "area": "Landing page · SEO",
+        "cliente": "Briggith Guzmán Chavarro, terapeuta energética",
+        "anio": "2026",
+        "texto": "Landing page del consultorio de terapias de Briggith Guzmán en Bucaramanga: presenta sus terapias, testimonios en video, podcast y ubicación, y lleva a agendar por WhatsApp. Está pensada para aparecer en Google, cargar rápido en cualquier celular y convertir visitas en citas.",
+        "lista": [
+          "SEO técnico: datos estructurados de negocio local, sitemap, Open Graph y URLs limpias",
+          "Velocidad: HTML pre-renderizado, imágenes AVIF y WebP en varios tamaños, y videos y mapa que cargan solo al usarse",
+          "Medición con Google Analytics y mejora continua a partir de los datos",
+          "Testimonios en video, podcast y redes sociales integrados",
+          "Agenda directa por WhatsApp, formulario de contacto y modo claro y oscuro"
+        ],
+        "chips": [
+          "Landing page",
+          "SEO local",
+          "Rendimiento",
+          "Google Analytics"
+        ],
+        "servicio": "web",
+        "imagen": "/images/proyectos/gauss.webp",
+        "url": "https://www.saludgauss.com"
+      },
+      {
+        "nombre": "VIANNE · Tienda en línea",
+        "menu": "Tienda VIANNE",
+        "area": "Landing page · Catálogo",
+        "cliente": "VIANNE",
+        "anio": "2026",
+        "texto": "Tienda en línea de lencería, bienestar y accesorios para Colombia. El catálogo se filtra por categoría y búsqueda, cada producto abre su galería con precio y existencias, y el botón de compra lleva a WhatsApp con el pedido listo.",
+        "lista": [
+          "Catálogo con filtros por categoría, buscador y detalle con galería de fotos",
+          "Compra por WhatsApp con el mensaje del pedido ya escrito",
+          "Productos administrados desde una hoja de cálculo: se actualizan sin tocar el código",
+          "Existencias visibles, aviso de últimas unidades y productos agotados",
+          "SEO, velocidad y medición con Google Analytics para la mejora continua"
+        ],
+        "chips": [
+          "React",
+          "Tailwind CSS",
+          "Animaciones",
+          "Google Analytics"
+        ],
+        "servicio": "web",
+        "imagen": "/images/proyectos/vianne-tienda.webp"
+      },
+      {
+        "nombre": "Vianne",
+        "area": "Desarrollo mobile · Backend",
+        "cliente": "Proyecto propio",
+        "anio": "2026",
+        "texto": "App móvil para reservar y llevar el seguimiento de citas de cuidado personal: uñas, pestañas, cortes, barbería, masajes o facial. Tiene dos caras: un marketplace donde el cliente descubre y reserva, y una herramienta de gestión para quien presta el servicio, sea independiente o un salón con equipo y varias sedes.",
+        "lista": [
+          "Reserva en pocos toques: horarios libres, solicitud, confirmación y contrapropuestas",
+          "Agenda del profesional, reservas manuales y bloqueos de tiempo",
+          "Ficha pública con portafolio, reseñas y búsqueda con filtros por precio, día y calificación",
+          "Negocios con equipo, sedes, cobros, ganancias y liquidaciones",
+          "Promociones para las horas de menos demanda y moderación de contenido"
+        ],
+        "chips": [
+          "React Native",
+          "Expo",
+          "TypeScript",
+          "Spring Boot",
+          "PostgreSQL",
+          "Redis"
+        ],
+        "servicio": "mobile",
+        "imagen": "/images/proyectos/vianne.webp"
+      },
+      {
+        "nombre": "App de eventos",
+        "area": "Desarrollo mobile · Backend",
+        "cliente": "Proyecto propio",
+        "anio": "2026",
+        "texto": "App para organizar eventos y vender sus boletas de principio a fin: el organizador crea el evento, define los tipos de boleta y arma su equipo; el asistente compra, recibe su boleta con QR y puede transferirla; y en la puerta el staff valida cada ingreso con el escáner.",
+        "lista": [
+          "Organizaciones, eventos y equipo de staff con permisos por evento",
+          "Compra con reserva temporal de las boletas, códigos promocionales y preguntas al comprador",
+          "Boletas con QR, acompañantes y transferencia de un solo uso",
+          "Escáner en la entrada y caja para cobrar en efectivo",
+          "Lista de invitados con aprobaciones"
+        ],
+        "chips": [
+          "React Native",
+          "Expo",
+          "TypeScript",
+          "Spring Boot",
+          "PostgreSQL",
+          "Redis"
+        ],
+        "servicio": "mobile",
+        "imagen": "/images/proyectos/eventos.webp"
+      },
+      {
+        "nombre": "App de moda",
+        "area": "Desarrollo mobile · Backend",
+        "cliente": "Proyecto propio",
+        "anio": "2026",
+        "texto": "App para diseñadores de moda y casas de diseño: cada diseñador arma su perfil profesional con su especialidad y su ubicación, trabaja como independiente o como casa de diseño, y crea sus prendas a partir de un boceto, una plantilla o una foto.",
+        "lista": [
+          "Registro y perfil del diseñador con foto, especialidades y trayectoria",
+          "Casas de diseño con sus miembros, o trabajo como independiente",
+          "Creación de productos desde un boceto, una plantilla o una foto",
+          "Catálogo de prendas con categorías, piezas, colores, estampados y tallajes",
+          "En español e inglés, con modo claro y oscuro"
+        ],
+        "chips": [
+          "React Native",
+          "Expo",
+          "TypeScript",
+          "Django REST",
+          "PostgreSQL"
+        ],
+        "servicio": "mobile",
+        "video": "/videos/app-moda.mp4"
+      },
+      {
+        "nombre": "Control de obra solar",
+        "area": "Desarrollo mobile",
+        "cliente": "Constructora de parques solares",
+        "anio": "2026",
+        "conjunto": "App móvil + consola web",
+        "texto": "App de campo para controlar la construcción de parques solares. El ingeniero de campo reporta el avance de cada actividad con cantidades, ubicación y evidencia; el ingeniero de calidad aprueba o devuelve cada reporte; y la administración sigue el avance de todos los proyectos. Forma un mismo sistema con la consola web.",
+        "lista": [
+          "Avance por actividad: hincado, tornillería, montaje de vigas y paneles, cableado y pruebas pull-out",
+          "Reporte de campo con cantidad ejecutada, ubicación en el layout (inversor, string, mesa y panel), turno y evidencia con foto y GPS",
+          "Bandeja de calidad para aprobar o devolver cada reporte",
+          "Seguimiento del avance global de cada proyecto",
+          "Tres roles con su propia vista: ingeniero de campo, ingeniero de calidad y administrador"
+        ],
+        "chips": [
+          "App móvil",
+          "Roles y permisos",
+          "Foto y GPS",
+          "Flujo de aprobación"
+        ],
+        "servicio": "mobile",
+        "imagen": "/images/proyectos/obra-solar-app.webp"
+      },
+      {
+        "nombre": "Consola web",
+        "menu": "Consola web",
+        "anexo": true,
+        "area": "Desarrollo web",
+        "cliente": "Constructora de parques solares",
+        "anio": "2026",
+        "conjunto": "Parte de Control de obra solar, junto con la app móvil",
+        "texto": "La consola de administración del mismo sistema. Desde el navegador se gestionan los proyectos, los equipos de trabajo, la maquinaria en renta, las alertas y la auditoría de toda la operación, con el avance certificado frente al plan.",
+        "lista": [
+          "Panel de control con avance certificado frente al plan, ritmo semanal y cierre estimado",
+          "Proyectos con avance por actividad, equipo asignado y maquinaria",
+          "Equipo, permisos por rol y solicitudes de acceso",
+          "Maquinaria en renta con contratos, mantenimiento y bitácora",
+          "Reportes de campo, alertas, mensajes y auditoría de cada cambio"
+        ],
+        "chips": [
+          "Consola web",
+          "Tableros",
+          "Roles y permisos",
+          "Auditoría"
+        ],
+        "servicio": "web",
+        "imagen": "/images/proyectos/obra-solar-consola.webp"
+      }
+    ]
+  },
+  "tecnologias": {
+    "cab": "Tecnologías",
+    "lugar": "Escritorio",
+    "titulo": "Con qué construimos",
+    "texto": "Estas son las tecnologías con las que trabajamos todos los días. Elegimos la combinación según lo que necesita cada proyecto.",
+    "grupos": [
+      {
+        "titulo": "Frontend",
+        "texto": "Interfaces web con Angular y React, y apps móviles con React Native y Flutter.",
+        "chips": [
+          "Angular",
+          "React",
+          "React Native",
+          "Flutter",
+          "JavaScript",
+          "TypeScript"
+        ]
+      },
+      {
+        "titulo": "Backend",
+        "texto": "Python con Django, Flask y FastAPI; Java con Spring Boot y Quarkus; además de Go y Node.js.",
+        "chips": [
+          "Python",
+          "Django",
+          "Flask",
+          "FastAPI",
+          "Java",
+          "Spring Boot",
+          "Quarkus",
+          "Go",
+          "Node.js"
+        ]
+      },
+      {
+        "titulo": "Bases de datos",
+        "texto": "Bases relacionales y documentales, con Redis como base de datos en caché.",
+        "chips": [
+          "PostgreSQL",
+          "MySQL",
+          "SQL Server",
+          "MongoDB",
+          "Redis"
+        ]
+      },
+      {
+        "titulo": "Despliegue en la nube",
+        "texto": "Desplegamos principalmente en AWS y DigitalOcean, y usamos Vercel para landing pages.",
+        "chips": [
+          "AWS",
+          "DigitalOcean",
+          "Vercel"
+        ]
+      },
+      {
+        "titulo": "IoT",
+        "texto": "Dispositivos a la medida conectados con software a la medida.",
+        "chips": [
+          "MQTT",
+          "CoAP",
+          "HTTP",
+          "Dispositivos a la medida"
+        ]
+      },
+      {
+        "titulo": "Inteligencia artificial",
+        "texto": "LLMs para acelerar el trabajo, n8n para automatizaciones, modelos estadísticos para análisis de datos y redes neuronales.",
+        "chips": [
+          "LLMs",
+          "n8n",
+          "Modelos estadísticos",
+          "Redes neuronales"
+        ]
+      },
+      {
+        "titulo": "Diseño 3D y mecánico",
+        "texto": "Modelado, render y diseño mecánico.",
+        "chips": [
+          "AutoCAD",
+          "Blender",
+          "ZBrush",
+          "Autodesk 3ds Max"
+        ]
+      }
+    ],
+    "volver": "Volver a la oficina",
+    "verProyectos": "Ver proyectos"
+  },
+  "nosotros": {
+    "cab": "Nosotros",
+    "lugar": "Estante y sala",
+    "menu": {
+      "titulo": "Nosotros",
+      "sub": "← → para cambiar de perfil"
+    },
+    "estudio": "Estudio tecnológico",
+    "titulo": "Quiénes somos",
+    "fotoAlt": "Los fundadores de JHS Software Solutions",
+    "pieFoto": "Jhon Henry Angulo y Hugo Sebastián Rodríguez · Fundadores",
+    "texto": "JHS Software Solutions es un estudio de tecnología e ingeniería. Unimos desarrollo de software, inteligencia artificial, electrónica y diseño mecánico y 3D para llevar una idea de la pantalla al mundo real, con el mismo equipo de principio a fin.",
+    "subtitulo": "Lo que hacemos",
+    "lista": [
+      "Software a la medida: sitios, aplicaciones y plataformas",
+      "Inteligencia artificial aplicada a procesos reales",
+      "Dispositivos conectados, del sensor al tablero",
+      "Diseño mecánico y 3D listo para fabricar"
+    ],
+    "ficha": [
+      {
+        "dato": "Ubicación",
+        "valor": "Bucaramanga, Colombia"
+      },
+      {
+        "dato": "Desde",
+        "valor": "[AÑO DE FUNDACIÓN]"
+      }
+    ],
+    "experiencia": "Experiencia",
+    "habilidades": "Habilidades",
+    "equipo": [
+      {
+        "id": "jhon",
+        "nombre": "Jhon Henry Angulo Buenahora",
+        "corto": "Jhon Henry Angulo",
+        "cargo": "Cofundador · Ingeniero mecánico",
+        "foto": "/images/jhon-angulo.webp",
+        "fotoAlt": "Jhon Henry Angulo Buenahora, cofundador de JHS Software Solutions",
+        "texto": "Su experiencia se centra en la optimización y estandarización de procesos, la capacitación de personal, la automatización de reportes y el seguimiento de indicadores KPI.",
+        "lista": [
+          "Auditorías 5S, pruebas de campo y documentación para estandarizar procesos y equipos",
+          "Apoyo en la gestión de proyectos CAPEX y construcción de líneas base con análisis costo/beneficio",
+          "Proyectos de mejora de eficiencia y recuperación de producto",
+          "Gestión de actividades con proveedores",
+          "Seguimiento al plan de producción y al cumplimiento de requerimientos de clientes clave"
+        ],
+        "chips": [
+          "Liderazgo",
+          "Gestión de proyectos",
+          "Capacidad de análisis",
+          "Comunicación",
+          "Optimización de procesos",
+          "Procedimientos operativos estándar",
+          "Pensamiento estratégico",
+          "Adaptabilidad",
+          "Orientación a objetivos",
+          "Indicadores KPI"
+        ]
+      },
+      {
+        "id": "hugo",
+        "nombre": "Hugo Sebastián Rodríguez",
+        "corto": "Hugo S. Rodríguez",
+        "cargo": "Cofundador · Ingeniero de sistemas",
+        "foto": "/images/hugo-rodriguez.webp",
+        "fotoAlt": "Hugo Sebastián Rodríguez, cofundador de JHS Software Solutions",
+        "texto": "Ha trabajado como desarrollador de software, analista de software, desarrollador web, asesor en programación y profesor particular de software y sistemas. Es una persona comprometida, empática, ética, responsable y servicial.",
+        "lista": [
+          "Desarrollo y análisis de software a la medida",
+          "Desarrollo web, de la interfaz a la base de datos",
+          "Despliegue de aplicaciones en AWS",
+          "Asesoría en programación y clases particulares de software y sistemas"
+        ],
+        "chips": [
+          "Desarrollo de bases de datos",
+          "Software personalizado",
+          "Desarrollo web",
+          "Diseño web",
+          "Seguridad de la información",
+          "Analítica empresarial",
+          "Desarrollo de aplicaciones",
+          "Gestión de la información",
+          "Despliegue en AWS",
+          "IoT"
+        ]
+      }
+    ],
+    "anterior": "← Anterior",
+    "siguiente": "Siguiente →",
+    "verServicios": "Ver servicios",
+    "hablemos": "Hablemos"
+  },
+  "taller": {
+    "cab": "Taller",
+    "lugar": "Herramientas e impresora",
+    "titulo": "3D e IoT",
+    "texto": "Además del software, tenemos conocimientos y proyectos desarrollados en diseño 3D e IoT. En el taller modelamos, imprimimos y conectamos los dispositivos que diseñamos.",
+    "grupos": [
+      {
+        "titulo": "Diseño 3D y fabricación",
+        "lista": [
+          "Modelado CAD de piezas y mecanismos",
+          "Impresión 3D de prototipos y piezas finales",
+          "Render y visualización de producto"
+        ]
+      },
+      {
+        "titulo": "IoT y electrónica",
+        "lista": [
+          "Prototipos con sensores y microcontroladores",
+          "Firmware y conectividad inalámbrica",
+          "Monitoreo y control desde la nube"
+        ]
+      }
+    ],
+    "verProyectos": "Ver proyectos",
+    "hablemos": "Hablemos"
+  },
+  "contact": {
+    "cab": "Contacto",
+    "lugar": "Mesa principal",
+    "title": "Cuéntanos tu proyecto",
+    "asunto": "Nuevo mensaje desde la web de {nombre}",
+    "fields": {
+      "name": "Nombre",
+      "email": "Correo",
+      "servicio": "Servicio",
+      "message": "¿Qué necesitas?"
+    },
+    "servicios": [
+      {
+        "id": "web",
+        "label": "Desarrollo web"
+      },
+      {
+        "id": "mobile",
+        "label": "Desarrollo mobile"
+      },
+      {
+        "id": "nube",
+        "label": "Despliegue en la nube"
+      },
+      {
+        "id": "ia",
+        "label": "Inteligencia artificial"
+      },
+      {
+        "id": "iot",
+        "label": "IoT"
+      },
+      {
+        "id": "d3d",
+        "label": "Diseño 3D"
+      },
+      {
+        "id": "mecanico",
+        "label": "Diseño mecánico"
+      },
+      {
+        "id": "otro",
+        "label": "Otro / varios"
+      }
+    ],
+    "send": "Enviar mensaje",
+    "sending": "Enviando…",
+    "ok": "Gracias por escribirnos. Te responderemos en [TIEMPO DE RESPUESTA].",
+    "error": "No pudimos enviar el mensaje. Intenta de nuevo o escríbenos directamente.",
+    "invalid": "Revisa los campos marcados.",
+    "privacidad": "Al enviar aceptas nuestra",
+    "privacidadLink": "política de privacidad",
+    "directo": [
+      {
+        "dato": "Correo",
+        "valor": "forgesolutions123@gmail.com",
+        "href": "mailto:forgesolutions123@gmail.com"
+      },
+      {
+        "dato": "Teléfono",
+        "valor": "316 097 8783",
+        "href": "tel:+573160978783"
+      },
+      {
+        "dato": "Ubicación",
+        "valor": "Bucaramanga, Colombia"
+      }
+    ]
+  },
+  "mapa": {
+    "cab": "Ubicación",
+    "lugar": "Mapa",
+    "titulo": "Bucaramanga, Colombia",
+    "alt": "Mapa 3D de Colombia con Bucaramanga resaltada en ámbar",
+    "ayuda": "Arrastra para girar el mapa",
+    "cerrar": "Cerrar mapa"
+  },
+  "privacy": {
+    "meta": {
+      "title": "Política de privacidad",
+      "description": "Cómo trata JHS Software Solutions los datos personales que nos compartes a través del formulario de contacto de este sitio web."
+    },
+    "title": "Política de privacidad",
+    "volver": "Volver a la oficina",
+    "paragraphs": [
+      "Los datos que envías en el formulario de contacto (nombre, correo y mensaje) se usan únicamente para responder tu solicitud y no se comparten con terceros.",
+      "Puedes consultar, actualizar o pedir que eliminemos tus datos escribiendo a forgesolutions123@gmail.com.",
+      "[Completa este texto con la política de tratamiento de datos de tu empresa. En Colombia aplica la Ley 1581 de 2012.]"
+    ]
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "privacidad": "Privacidad"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "text": "La página que buscas no existe o fue movida.",
+    "back": "Volver a la oficina"
+  }
+}

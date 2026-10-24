@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Diseño mecánico</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  body { background: linear-gradient(rgb(76 157 255 / .07) 1px, transparent 1px) 0 0 / 40px 40px, linear-gradient(90deg, rgb(76 157 255 / .07) 1px, transparent 1px) 0 0 / 40px 40px,
+    radial-gradient(70% 80% at 30% 60%, rgb(46 120 255 / .14), transparent 70%), var(--fondo); }
+  .engrane { fill: rgb(76 157 255 / .08); stroke: var(--azul); stroke-width: 3; filter: var(--brillo); }
+  .cota { stroke: var(--claro); stroke-width: 1.8; fill: none; }
+  .cota-txt { font-size: 20px; fill: var(--claro); }
+  .pieza { fill: rgb(76 157 255 / .06); stroke: var(--azul); stroke-width: 3; filter: var(--brillo); }
+  .rotulo { position: absolute; left: 1150px; top: 676px; width: 380px; padding: 14px 18px; font: 400 15px/1.5 "JetBrains Mono"; color: var(--tenue); }
+  .rotulo b { color: var(--texto); font-weight: 400; }
+</style></head>
+<body>
+  <div class="cab"><div class="num">SERVICIO 07</div><h1>Diseño mecánico</h1><div class="bajada">Piezas y mecanismos listos para fabricar.</div></div>
+
+  <svg width="1600" height="900" style="position:absolute;inset:0">
+    <defs>
+      <linearGradient id="esfuerzo" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#2d6bff" stop-opacity=".55" /><stop offset=".45" stop-color="#5ee1ff" stop-opacity=".5" />
+        <stop offset=".75" stop-color="#f2b45a" stop-opacity=".65" /><stop offset="1" stop-color="#ff6b6b" stop-opacity=".75" />
+      </linearGradient>
+    </defs>
+    <g id="engranes" data-en="0.2" data-desde="scale(.9)" style="transform-origin:400px 590px"></g>
+
+    <!-- Plano de la pieza: soporte con dos agujeros y un redondeo -->
+    <g data-en="0.6" data-desde="none">
+      <path class="pieza" d="M820 360 H1230 V470 H1040 Q1010 470 1010 500 V640 H820 Z" />
+      <circle class="pieza" cx="890" cy="420" r="26" /><circle class="pieza" cx="1160" cy="415" r="20" /><circle class="pieza" cx="915" cy="580" r="26" />
+    </g>
+    <path d="M820 360 H1230 V470 H1040 Q1010 470 1010 500 V640 H820 Z" fill="url(#esfuerzo)" data-en="5.0" />
+    <!-- Cotas que se trazan solas -->
+    <path class="cota" d="M820 330 V310 M1230 330 V310 M820 318 H1230 M820 318 l14 -6 v12 z M1230 318 l-14 -6 v12 z" data-traza="1.4" data-dura=".9" />
+    <text class="cota-txt" x="990" y="304" data-en="2.1">120 mm</text>
+    <path class="cota" d="M790 360 H770 M790 640 H770 M778 360 V640 M778 360 l-6 14 h12 z M778 640 l-6 -14 h12 z" data-traza="2.2" data-dura=".9" />
+    <text class="cota-txt" x="700" y="506" data-en="2.9">80 mm</text>
+    <path class="cota" d="M1160 415 L1250 360 H1300" data-traza="3.0" data-dura=".6" />
+    <text class="cota-txt" x="1258" y="350" data-en="3.5">Ø 12</text>
+    <path class="cota" d="M1018 482 L1070 540 H1130" data-traza="3.6" data-dura=".6" />
+    <text class="cota-txt" x="1080" y="532" data-en="4.1">R 30</text>
+  </svg>
+
+  <div class="caja rotulo" data-en="5.4">Simulación de esfuerzos<br><b>Máx. 42 MPa</b> · factor de seguridad <b>2,4</b><br>Material: <b>aluminio 6061</b></div>
+  <div class="chips"><span>CAD</span><span>Planos</span><span>Simulación</span><span>Prototipos</span></div>
+
+  <script>
+    // Dos engranes con el mismo módulo (12 y 24 dientes). En 8 s el pequeño da una vuelta y el grande media:
+    // ambos vuelven a una posición equivalente, así el video repite sin saltos.
+    const ns = "http://www.w3.org/2000/svg", g = document.getElementById("engranes");
+    const M = 12;
+    function engrane(N) {
+      const r = (M * N) / 2, ra = r + M, rf = r - 1.25 * M, paso = (2 * Math.PI) / N, p = [];
+      for (let k = 0; k < N; k++) {
+        const a = k * paso;
+        for (const [ang, rad] of [[-0.5, rf], [-0.32, rf], [-0.2, ra], [0.2, ra], [0.32, rf], [0.5, rf]]) {
+          const t = a + ang * paso; p.push(`${(rad * Math.cos(t)).toFixed(1)} ${(rad * Math.sin(t)).toFixed(1)}`);
+        }
+      }
+      return `M${p.join(" L")} Z M ${(0.32 * r).toFixed(1)} 0 A ${(0.32 * r).toFixed(1)} ${(0.32 * r).toFixed(1)} 0 1 0 ${(-0.32 * r).toFixed(1)} 0 A ${(0.32 * r).toFixed(1)} ${(0.32 * r).toFixed(1)} 0 1 0 ${(0.32 * r).toFixed(1)} 0`;
+    }
+    const css = document.createElement("style");
+    css.textContent = "@keyframes g1{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}@keyframes g2{from{transform:rotate(7.5deg)}to{transform:rotate(-172.5deg)}}";
+    document.head.appendChild(css);
+    const poner = (N, cx, cy, anim) => {
+      const grupo = document.createElementNS(ns, "g"); grupo.setAttribute("transform", `translate(${cx} ${cy})`);
+      const ruta = document.createElementNS(ns, "path"); ruta.setAttribute("d", engrane(N)); ruta.setAttribute("class", "engrane");
+      ruta.setAttribute("fill-rule", "evenodd"); ruta.style.animation = `${anim} 8s linear infinite`;
+      grupo.appendChild(ruta); g.appendChild(grupo);
+    };
+    poner(24, 330, 600, "g2");                 // r = 144
+    poner(12, 330 + 144 + 72, 600, "g1");      // r = 72, a la distancia de engrane
+  </script>
+  <script src="base.js"></script>
+</body></html>

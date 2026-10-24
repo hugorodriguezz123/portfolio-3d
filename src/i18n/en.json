@@ -1,0 +1,822 @@
+{
+  "languages": {
+    "es": "Español",
+    "en": "English"
+  },
+  "a11y": {
+    "skip": "Skip to content",
+    "mainNav": "Office sections",
+    "language": "Change language",
+    "toggleTheme": "Change theme",
+    "menu": "Open menu",
+    "inicio": "JHS Software Solutions, back to home",
+    "escena": "3D office of JHS Software Solutions. Use the menu or the arrow keys to walk through it.",
+    "pad": "Move around the office",
+    "padArriba": "Center screen: projects",
+    "padAbajo": "Workshop: 3D and IoT",
+    "padIzq": "Left screen: services",
+    "padDer": "Shelf and lounge: about us",
+    "padIzqServicios": "Previous service",
+    "padDerServicios": "Next service",
+    "padIzqNosotros": "Previous profile",
+    "padDerNosotros": "Next profile",
+    "padIzqProyectos": "Previous project",
+    "padDerProyectos": "Next project",
+    "flechaIzq": "Left arrow",
+    "flechaArriba": "Up arrow",
+    "flechaDer": "Right arrow",
+    "flechaAbajo": "Down arrow",
+    "teclaCtrl": "Control or Command key",
+    "teclaEspacio": "Space bar",
+    "teclaX": "X key",
+    "areas": "Areas",
+    "tecnologias": "Technologies"
+  },
+  "nav": {
+    "home": "Home"
+  },
+  "home": {
+    "meta": {
+      "title": "Web, AI, IoT and 3D design | JHS Software Solutions",
+      "description": "Custom web and mobile development, cloud deployment, artificial intelligence, IoT, mechanical and 3D design. Walk through our virtual office."
+    }
+  },
+  "top": {
+    "contacto": "Contact"
+  },
+  "portada": {
+    "ceja": "Technology and engineering studio",
+    "lead": "We take your idea from the screen to the real world: we build software, artificial intelligence and connected devices, and we design the parts and 3D models that make them possible. All with one team.",
+    "entrar": "Enter the office",
+    "contacto": "Tell us about your project",
+    "servicios": [
+      "Web development",
+      "Mobile development",
+      "Cloud",
+      "Artificial intelligence",
+      "IoT",
+      "3D design",
+      "Mechanical design"
+    ],
+    "bajar": "Scroll to enter the office",
+    "fotoAlt": "The founders of JHS Software Solutions",
+    "cargando": "Loading the 3D office",
+    "error": "Your browser could not display the 3D office.",
+    "sin3d": "View the content without 3D"
+  },
+  "menu": {
+    "items": [
+      {
+        "id": "servicios",
+        "label": "Services",
+        "tecla": "←",
+        "teclaAria": "a11y.flechaIzq"
+      },
+      {
+        "id": "proyectos",
+        "label": "Projects",
+        "tecla": "↑",
+        "teclaAria": "a11y.flechaArriba"
+      },
+      {
+        "id": "tecnologias",
+        "label": "Technologies",
+        "tecla": "Ctrl/⌘",
+        "teclaAria": "a11y.teclaCtrl"
+      },
+      {
+        "id": "nosotros",
+        "label": "About us",
+        "tecla": "→",
+        "teclaAria": "a11y.flechaDer"
+      },
+      {
+        "id": "taller",
+        "label": "3D & IoT workshop",
+        "tecla": "↓",
+        "teclaAria": "a11y.flechaAbajo"
+      },
+      {
+        "id": "contacto",
+        "label": "Contact",
+        "tecla": "Space",
+        "teclaAria": "a11y.teclaEspacio"
+      },
+      {
+        "id": "mapa",
+        "label": "Location",
+        "tecla": "X",
+        "teclaAria": "a11y.teclaX"
+      }
+    ],
+    "vista": "Overview",
+    "inicio": "Home",
+    "todas": "All sections",
+    "servicios": {
+      "titulo": "Services",
+      "sub": "← → to change service"
+    },
+    "proyectos": {
+      "titulo": "Projects",
+      "sub": "← → to change project"
+    }
+  },
+  "pista": {
+    "antes": "Click",
+    "objetos": [
+      "a screen",
+      "the desk",
+      "the shelf",
+      "the table",
+      "the map"
+    ],
+    "despues": "or use",
+    "teclas": "← ↑ → ↓ · Ctrl · Space · X"
+  },
+  "hud": {
+    "abrir": "open",
+    "nombres": {
+      "servicios": "Services",
+      "proyectos": "Projects",
+      "tecnologias": "Technologies",
+      "nosotros": "About us",
+      "taller": "3D & IoT workshop",
+      "contacto": "Contact"
+    }
+  },
+  "servicios": {
+    "titulo": "Services",
+    "cab": "Service",
+    "lugar": "Left screen",
+    "queHacemos": "What we do",
+    "cotizar": "Get a quote",
+    "anterior": "← Previous",
+    "siguiente": "Next →",
+    "items": [
+      {
+        "id": "web",
+        "nombre": "Web development",
+        "titulo": "Custom web development",
+        "texto": "We build everything from landing pages to advanced web platforms with APIs, databases and background jobs, designed and coded around your business.",
+        "lista": [
+          "Landing pages and corporate sites ready for search engines",
+          "Custom web applications and admin dashboards",
+          "APIs, databases and integrations with your systems",
+          "Background events and jobs: emails, reports and syncs",
+          "Online stores and interactive 3D experiences, like this office"
+        ],
+        "nota": "We hand over the source code and the complete project. The code is yours: we never keep ownership of it.",
+        "chips": [
+          "Frontend",
+          "Backend and APIs",
+          "Databases",
+          "Background jobs"
+        ],
+        "video": "/videos/servicios/web.en.mp4"
+      },
+      {
+        "id": "mobile",
+        "nombre": "Mobile development",
+        "texto": "We build mobile apps for Android and iOS, from simple apps that showcase your brand to advanced apps with APIs, databases and background jobs.",
+        "lista": [
+          "Informational and catalog apps for your brand",
+          "Custom apps connected to your API and database",
+          "Notifications, syncing and background jobs",
+          "Support to publish on Google Play and the App Store"
+        ],
+        "nota": "We hand over the source code and the complete project. The code is yours: we never keep ownership of it.",
+        "chips": [
+          "Android",
+          "iOS",
+          "APIs",
+          "Notifications"
+        ],
+        "video": "/videos/servicios/mobile.en.mp4"
+      },
+      {
+        "id": "nube",
+        "nombre": "Cloud deployment",
+        "texto": "We put your application online and keep it running smoothly: we set up servers, domains and databases in the cloud so your project is available, secure and ready to grow.",
+        "lista": [
+          "Servers, domains and SSL certificates",
+          "Cloud databases and storage",
+          "Automatic deployment on every change (CI/CD)",
+          "Monitoring, backups and scaling on demand"
+        ],
+        "chips": [
+          "Servers",
+          "Containers",
+          "CI/CD",
+          "Monitoring"
+        ],
+        "video": "/videos/servicios/nube.en.mp4"
+      },
+      {
+        "id": "ia",
+        "nombre": "Artificial intelligence",
+        "texto": "We put AI to work in your operations: from automations and custom assistants to data analysis, predictive models and neural networks trained for your case.",
+        "lista": [
+          "AI-powered automation of processes, tasks and documents",
+          "Personal assistants and chatbots that know your company's information",
+          "Data analysis and predictive models",
+          "Custom neural networks and computer vision"
+        ],
+        "chips": [
+          "Automation",
+          "AI assistants",
+          "Predictive models",
+          "Neural networks"
+        ],
+        "video": "/videos/servicios/ia.en.mp4"
+      },
+      {
+        "id": "iot",
+        "nombre": "IoT",
+        "titulo": "IoT · Internet of Things",
+        "texto": "From sensor to dashboard: we build the hardware, firmware and platform so you can monitor and control your equipment in real time, from anywhere.",
+        "lista": [
+          "Device prototypes with sensors and actuators",
+          "Firmware for microcontrollers",
+          "Cloud monitoring dashboards and alerts",
+          "Integration with your existing systems and equipment"
+        ],
+        "chips": [
+          "Sensors",
+          "Firmware",
+          "Cloud",
+          "Dashboards"
+        ],
+        "video": "/videos/servicios/iot.en.mp4"
+      },
+      {
+        "id": "d3d",
+        "nombre": "3D design",
+        "texto": "We model products, spaces and parts in 3D to present, validate and manufacture them: from renders for your catalog to interactive experiences on your website.",
+        "lista": [
+          "Modeling and rendering of products and spaces",
+          "Interactive 3D scenes for the web",
+          "Models ready for 3D printing",
+          "Animations and virtual tours"
+        ],
+        "chips": [
+          "Modeling",
+          "Rendering",
+          "Web 3D",
+          "3D printing"
+        ],
+        "video": "/videos/servicios/d3d.en.mp4"
+      },
+      {
+        "id": "mecanico",
+        "nombre": "Mechanical design",
+        "texto": "We design parts and mechanisms with engineering judgment, validate them and deliver drawings and prototypes ready for production.",
+        "lista": [
+          "CAD design of parts, assemblies and mechanisms",
+          "Manufacturing drawings and technical specifications",
+          "Design analysis and validation",
+          "Rapid prototyping with 3D printing"
+        ],
+        "chips": [
+          "CAD",
+          "Drawings",
+          "Simulation",
+          "Prototypes"
+        ],
+        "video": "/videos/servicios/mecanico.en.mp4"
+      }
+    ],
+    "entrega": "Delivery"
+  },
+  "proyectos": {
+    "titulo": "Projects",
+    "cab": "Project",
+    "lugar": "Center screen",
+    "queHicimos": "What we did",
+    "area": "Area",
+    "cliente": "Client",
+    "anio": "Year",
+    "sitio": "Website",
+    "conjunto": "System",
+    "anterior": "← Previous",
+    "siguiente": "Next →",
+    "quiero": "I want something like this",
+    "items": [
+      {
+        "nombre": "3D virtual office",
+        "area": "Web development · 3D design",
+        "cliente": "JHS Software Solutions, in-house project",
+        "anio": "[AÑO]",
+        "texto": "This very website: a 3D office you can walk through in the browser, with a guided camera, animated characters that walk around the furniture, and sections that open when you click on objects.",
+        "lista": [
+          "Modeling, texturing and lighting of the whole office",
+          "Animated characters that find their way around the furniture",
+          "Optimized to load and run in the browser",
+          "Navigation with clicks, scrolling and the keyboard"
+        ],
+        "chips": [
+          "Web 3D",
+          "3D modeling",
+          "Animation",
+          "Optimization"
+        ],
+        "servicio": "web"
+      },
+      {
+        "nombre": "SARA IoT",
+        "area": "IoT · Web development · Cloud",
+        "cliente": "Rural community projects (SARA system)",
+        "anio": "2026",
+        "texto": "An IoT service that monitors the weather of rural communities in real time and supports the management of their infrastructure projects. A weather station sends its readings to a cloud API, and a web platform turns them into maps, alerts, history and reports. It works as an add-on layer to the SARA system, without affecting the rest of it.",
+        "lista": [
+          "Ecowitt weather station connected via webhook: wind, rain, UV radiation, temperature and humidity",
+          "REST API with Django and background processing with Celery and Redis: no reading is ever lost",
+          "React web platform with a station map, alerts, zone comparison and PDF and CSV reports",
+          "Three roles with their own permissions: administrator, community operator and external consultant",
+          "Deployed on AWS and tested: 1,510 requests without errors, with responses under 140 ms (p95)"
+        ],
+        "chips": [
+          "IoT",
+          "Django REST",
+          "React + TypeScript",
+          "PostgreSQL",
+          "Celery + Redis",
+          "AWS"
+        ],
+        "servicio": "iot",
+        "video": "/videos/sara-iot.mp4",
+        "url": "https://saraiot.com"
+      },
+      {
+        "nombre": "Gauss · Vital Energy Center",
+        "menu": "Gauss",
+        "area": "Landing page · SEO",
+        "cliente": "Briggith Guzmán Chavarro, energy therapist",
+        "anio": "2026",
+        "texto": "Landing page for Briggith Guzmán's therapy practice in Bucaramanga: it presents her therapies, video testimonials, podcast and location, and leads visitors to book through WhatsApp. It is built to show up on Google, load fast on any phone and turn visits into appointments.",
+        "lista": [
+          "Technical SEO: local business structured data, sitemap, Open Graph and clean URLs",
+          "Speed: pre-rendered HTML, AVIF and WebP images in several sizes, and videos and a map that load only when used",
+          "Measurement with Google Analytics and continuous improvement based on the data",
+          "Video testimonials, podcast and social media built in",
+          "Direct booking through WhatsApp, contact form and light and dark mode"
+        ],
+        "chips": [
+          "Landing page",
+          "Local SEO",
+          "Performance",
+          "Google Analytics"
+        ],
+        "servicio": "web",
+        "imagen": "/images/proyectos/gauss.webp",
+        "url": "https://www.saludgauss.com"
+      },
+      {
+        "nombre": "VIANNE · Online store",
+        "menu": "VIANNE store",
+        "area": "Landing page · Catalog",
+        "cliente": "VIANNE",
+        "anio": "2026",
+        "texto": "Online store for lingerie, wellness products and accessories in Colombia. The catalog can be filtered by category and search, each product opens its gallery with price and stock, and the buy button takes you to WhatsApp with the order ready to send.",
+        "lista": [
+          "Catalog with category filters, search and a detail view with a photo gallery",
+          "Purchase through WhatsApp with the order message already written",
+          "Products managed from a spreadsheet: they update without touching the code",
+          "Visible stock, low-stock notices and sold-out products",
+          "SEO, speed and measurement with Google Analytics for continuous improvement"
+        ],
+        "chips": [
+          "React",
+          "Tailwind CSS",
+          "Animations",
+          "Google Analytics"
+        ],
+        "servicio": "web",
+        "imagen": "/images/proyectos/vianne-tienda.webp"
+      },
+      {
+        "nombre": "Vianne",
+        "area": "Mobile development · Backend",
+        "cliente": "In-house project",
+        "anio": "2026",
+        "texto": "Mobile app to book and keep track of personal care appointments: nails, lashes, haircuts, barbering, massages or facials. It has two sides: a marketplace where clients discover and book, and a management tool for the people who provide the service, whether freelancers or salons with a team and several locations.",
+        "lista": [
+          "Book in a few taps: open time slots, request, confirmation and counter-offers",
+          "Professional's calendar, manual bookings and time blocking",
+          "Public profile with portfolio, reviews and search filtered by price, day and rating",
+          "Businesses with teams, locations, payments, earnings and payouts",
+          "Promotions for off-peak hours and content moderation"
+        ],
+        "chips": [
+          "React Native",
+          "Expo",
+          "TypeScript",
+          "Spring Boot",
+          "PostgreSQL",
+          "Redis"
+        ],
+        "servicio": "mobile",
+        "imagen": "/images/proyectos/vianne.webp"
+      },
+      {
+        "nombre": "Events app",
+        "area": "Mobile development · Backend",
+        "cliente": "In-house project",
+        "anio": "2026",
+        "texto": "An app to organize events and sell their tickets end to end: the organizer creates the event, defines the ticket types and builds a team; attendees buy, receive a QR ticket and can transfer it; and at the door the staff validates every entry with the scanner.",
+        "lista": [
+          "Organizations, events and staff teams with per-event permissions",
+          "Checkout with temporary ticket holds, promo codes and buyer questions",
+          "QR tickets, companions and one-time transfers",
+          "Scanner at the entrance and a cash desk for cash payments",
+          "Guest list with approvals"
+        ],
+        "chips": [
+          "React Native",
+          "Expo",
+          "TypeScript",
+          "Spring Boot",
+          "PostgreSQL",
+          "Redis"
+        ],
+        "servicio": "mobile",
+        "imagen": "/images/proyectos/eventos.en.webp"
+      },
+      {
+        "nombre": "Fashion app",
+        "area": "Mobile development · Backend",
+        "cliente": "In-house project",
+        "anio": "2026",
+        "texto": "An app for fashion designers and design houses: each designer builds a professional profile with their specialty and location, works as a freelancer or as a design house, and creates garments from a sketch, a template or a photo.",
+        "lista": [
+          "Designer sign-up and profile with photo, specialties and background",
+          "Design houses with their members, or freelance work",
+          "Product creation from a sketch, a template or a photo",
+          "Garment catalog with categories, parts, colors, prints and fits",
+          "In Spanish and English, with light and dark mode"
+        ],
+        "chips": [
+          "React Native",
+          "Expo",
+          "TypeScript",
+          "Django REST",
+          "PostgreSQL"
+        ],
+        "servicio": "mobile",
+        "video": "/videos/app-moda.mp4"
+      },
+      {
+        "nombre": "Solar site control",
+        "area": "Mobile development",
+        "cliente": "Solar farm construction company",
+        "anio": "2026",
+        "conjunto": "Mobile app + web console",
+        "texto": "A field app to manage the construction of solar farms. The field engineer reports the progress of each activity with quantities, location and evidence; the quality engineer approves or returns each report; and management follows the progress of every project. It forms a single system with the web console.",
+        "lista": [
+          "Progress by activity: pile driving, bolting, beam and panel mounting, wiring and pull-out tests",
+          "Field report with executed quantity, layout location (inverter, string, table and panel), shift and photo and GPS evidence",
+          "Quality inbox to approve or return each report",
+          "Overall progress tracking for each project",
+          "Three roles with their own view: field engineer, quality engineer and administrator"
+        ],
+        "chips": [
+          "Mobile app",
+          "Roles and permissions",
+          "Photo and GPS",
+          "Approval workflow"
+        ],
+        "servicio": "mobile",
+        "imagen": "/images/proyectos/obra-solar-app.webp"
+      },
+      {
+        "nombre": "Web console",
+        "menu": "Web console",
+        "anexo": true,
+        "area": "Web development",
+        "cliente": "Solar farm construction company",
+        "anio": "2026",
+        "conjunto": "Part of Solar site control, together with the mobile app",
+        "texto": "The administration console of the same system. From the browser you manage projects, work teams, rented machinery, alerts and the audit trail of the whole operation, with certified progress against the plan.",
+        "lista": [
+          "Dashboard with certified progress against the plan, weekly pace and estimated completion",
+          "Projects with progress by activity, assigned team and machinery",
+          "Team, role permissions and access requests",
+          "Rented machinery with contracts, maintenance and logbook",
+          "Field reports, alerts, messages and an audit trail of every change"
+        ],
+        "chips": [
+          "Web console",
+          "Dashboards",
+          "Roles and permissions",
+          "Audit trail"
+        ],
+        "servicio": "web",
+        "imagen": "/images/proyectos/obra-solar-consola.webp"
+      }
+    ]
+  },
+  "tecnologias": {
+    "cab": "Technologies",
+    "lugar": "Desk",
+    "titulo": "What we build with",
+    "texto": "These are the technologies we work with every day. We choose the combination each project needs.",
+    "grupos": [
+      {
+        "titulo": "Frontend",
+        "texto": "Web interfaces with Angular and React, and mobile apps with React Native and Flutter.",
+        "chips": [
+          "Angular",
+          "React",
+          "React Native",
+          "Flutter",
+          "JavaScript",
+          "TypeScript"
+        ]
+      },
+      {
+        "titulo": "Backend",
+        "texto": "Python with Django, Flask and FastAPI; Java with Spring Boot and Quarkus; plus Go and Node.js.",
+        "chips": [
+          "Python",
+          "Django",
+          "Flask",
+          "FastAPI",
+          "Java",
+          "Spring Boot",
+          "Quarkus",
+          "Go",
+          "Node.js"
+        ]
+      },
+      {
+        "titulo": "Databases",
+        "texto": "Relational and document databases, with Redis as a cache database.",
+        "chips": [
+          "PostgreSQL",
+          "MySQL",
+          "SQL Server",
+          "MongoDB",
+          "Redis"
+        ]
+      },
+      {
+        "titulo": "Cloud deployment",
+        "texto": "We mainly deploy on AWS and DigitalOcean, and use Vercel for landing pages.",
+        "chips": [
+          "AWS",
+          "DigitalOcean",
+          "Vercel"
+        ]
+      },
+      {
+        "titulo": "IoT",
+        "texto": "Custom devices connected to custom software.",
+        "chips": [
+          "MQTT",
+          "CoAP",
+          "HTTP",
+          "Custom devices"
+        ]
+      },
+      {
+        "titulo": "Artificial intelligence",
+        "texto": "LLMs to speed up work, n8n for automations, statistical models for data analysis, and neural networks.",
+        "chips": [
+          "LLMs",
+          "n8n",
+          "Statistical models",
+          "Neural networks"
+        ]
+      },
+      {
+        "titulo": "3D and mechanical design",
+        "texto": "Modeling, rendering and mechanical design.",
+        "chips": [
+          "AutoCAD",
+          "Blender",
+          "ZBrush",
+          "Autodesk 3ds Max"
+        ]
+      }
+    ],
+    "volver": "Back to the office",
+    "verProyectos": "See projects"
+  },
+  "nosotros": {
+    "cab": "About us",
+    "lugar": "Shelf and lounge",
+    "menu": {
+      "titulo": "About us",
+      "sub": "← → to change profile"
+    },
+    "estudio": "Technology studio",
+    "titulo": "Who we are",
+    "fotoAlt": "The founders of JHS Software Solutions",
+    "pieFoto": "Jhon Henry Angulo and Hugo Sebastián Rodríguez · Founders",
+    "texto": "JHS Software Solutions is a technology and engineering studio. We combine software development, artificial intelligence, electronics, and mechanical and 3D design to take an idea from the screen to the real world, with the same team from start to finish.",
+    "subtitulo": "What we do",
+    "lista": [
+      "Custom software: websites, apps and platforms",
+      "Artificial intelligence applied to real processes",
+      "Connected devices, from sensor to dashboard",
+      "Mechanical and 3D design ready to manufacture"
+    ],
+    "ficha": [
+      {
+        "dato": "Location",
+        "valor": "Bucaramanga, Colombia"
+      },
+      {
+        "dato": "Since",
+        "valor": "[AÑO DE FUNDACIÓN]"
+      }
+    ],
+    "experiencia": "Experience",
+    "habilidades": "Skills",
+    "equipo": [
+      {
+        "id": "jhon",
+        "nombre": "Jhon Henry Angulo Buenahora",
+        "corto": "Jhon Henry Angulo",
+        "cargo": "Co-founder · Mechanical engineer",
+        "foto": "/images/jhon-angulo.webp",
+        "fotoAlt": "Jhon Henry Angulo Buenahora, co-founder of JHS Software Solutions",
+        "texto": "His experience focuses on process optimization and standardization, staff training, report automation and KPI tracking.",
+        "lista": [
+          "5S audits, field tests and documentation to standardize processes and equipment",
+          "Support in CAPEX project management and building baselines with cost/benefit analysis",
+          "Efficiency improvement and product recovery projects",
+          "Management of supplier activities",
+          "Tracking of the production plan and compliance with key client requirements"
+        ],
+        "chips": [
+          "Leadership",
+          "Project management",
+          "Analytical skills",
+          "Communication",
+          "Process optimization",
+          "Standard operating procedures",
+          "Strategic thinking",
+          "Adaptability",
+          "Goal orientation",
+          "KPIs"
+        ]
+      },
+      {
+        "id": "hugo",
+        "nombre": "Hugo Sebastián Rodríguez",
+        "corto": "Hugo S. Rodríguez",
+        "cargo": "Co-founder · Systems engineer",
+        "foto": "/images/hugo-rodriguez.webp",
+        "fotoAlt": "Hugo Sebastián Rodríguez, co-founder of JHS Software Solutions",
+        "texto": "He has worked as a software developer, software analyst, web developer, programming consultant and private tutor in software and systems. He is committed, empathetic, ethical, responsible and eager to help.",
+        "lista": [
+          "Custom software development and analysis",
+          "Web development, from the interface to the database",
+          "Application deployment on AWS",
+          "Programming consulting and private tutoring in software and systems"
+        ],
+        "chips": [
+          "Database development",
+          "Custom software",
+          "Web development",
+          "Web design",
+          "Information security",
+          "Business analytics",
+          "Application development",
+          "Information management",
+          "AWS deployment",
+          "IoT"
+        ]
+      }
+    ],
+    "anterior": "← Previous",
+    "siguiente": "Next →",
+    "verServicios": "See services",
+    "hablemos": "Let's talk"
+  },
+  "taller": {
+    "cab": "Workshop",
+    "lugar": "Tools and printer",
+    "titulo": "3D and IoT",
+    "texto": "Beyond software, we have know-how and completed projects in 3D design and IoT. In the workshop we model, print and connect the devices we design.",
+    "grupos": [
+      {
+        "titulo": "3D design and fabrication",
+        "lista": [
+          "CAD modeling of parts and mechanisms",
+          "3D printing of prototypes and final parts",
+          "Product rendering and visualization"
+        ]
+      },
+      {
+        "titulo": "IoT and electronics",
+        "lista": [
+          "Prototypes with sensors and microcontrollers",
+          "Firmware and wireless connectivity",
+          "Monitoring and control from the cloud"
+        ]
+      }
+    ],
+    "verProyectos": "See projects",
+    "hablemos": "Let's talk"
+  },
+  "contact": {
+    "cab": "Contact",
+    "lugar": "Main table",
+    "title": "Tell us about your project",
+    "asunto": "New message from the {nombre} website",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "servicio": "Service",
+      "message": "What do you need?"
+    },
+    "servicios": [
+      {
+        "id": "web",
+        "label": "Web development"
+      },
+      {
+        "id": "mobile",
+        "label": "Mobile development"
+      },
+      {
+        "id": "nube",
+        "label": "Cloud deployment"
+      },
+      {
+        "id": "ia",
+        "label": "Artificial intelligence"
+      },
+      {
+        "id": "iot",
+        "label": "IoT"
+      },
+      {
+        "id": "d3d",
+        "label": "3D design"
+      },
+      {
+        "id": "mecanico",
+        "label": "Mechanical design"
+      },
+      {
+        "id": "otro",
+        "label": "Other / several"
+      }
+    ],
+    "send": "Send message",
+    "sending": "Sending…",
+    "ok": "Thanks for writing to us. We will reply within [TIEMPO DE RESPUESTA].",
+    "error": "We couldn't send your message. Please try again or write to us directly.",
+    "invalid": "Please check the highlighted fields.",
+    "privacidad": "By sending you accept our",
+    "privacidadLink": "privacy policy",
+    "directo": [
+      {
+        "dato": "Email",
+        "valor": "forgesolutions123@gmail.com",
+        "href": "mailto:forgesolutions123@gmail.com"
+      },
+      {
+        "dato": "Phone",
+        "valor": "+57 316 097 8783",
+        "href": "tel:+573160978783"
+      },
+      {
+        "dato": "Location",
+        "valor": "Bucaramanga, Colombia"
+      }
+    ]
+  },
+  "mapa": {
+    "cab": "Location",
+    "lugar": "Map",
+    "titulo": "Bucaramanga, Colombia",
+    "alt": "3D map of Colombia with Bucaramanga highlighted in amber",
+    "ayuda": "Drag to rotate the map",
+    "cerrar": "Close map"
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privacy policy",
+      "description": "How JHS Software Solutions handles the personal data you share with us through the contact form on this website."
+    },
+    "title": "Privacy policy",
+    "volver": "Back to the office",
+    "paragraphs": [
+      "The data you send through the contact form (name, email and message) is used only to answer your request and is not shared with third parties.",
+      "You can review, update or ask us to delete your data by writing to forgesolutions123@gmail.com.",
+      "[Completa este texto con la política de tratamiento de datos de tu empresa. En Colombia aplica la Ley 1581 de 2012.]"
+    ]
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacidad": "Privacy"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you are looking for does not exist or has been moved.",
+    "back": "Back to the office"
+  }
+}

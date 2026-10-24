@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>IoT</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .lect { left: 70px; top: 610px; width: 270px; padding: 16px 20px; }
+  .lect .fila { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; font-size: 19px; color: var(--tenue); }
+  .lect .valor { position: relative; width: 110px; height: 26px; text-align: right; }
+  .lect .valor b { position: absolute; right: 0; top: 0; font: 400 22px/1 "JetBrains Mono"; color: var(--cian); }
+  .titulo { font: 600 24px/1.1 "Manrope", sans-serif; }
+  .sub { display: block; margin-top: 8px; font: 400 15px/1.3 "JetBrains Mono"; color: var(--tenue); }
+  .onda { position: absolute; border: 2.5px solid rgb(94 225 255 / .7); border-radius: 50%; animation: emite 2s ease-out infinite; }
+  @keyframes emite { from { transform: scale(.3); opacity: 1; } to { transform: scale(1.4); opacity: 0; } }
+  .proto { position: absolute; left: 0; right: 0; bottom: 22px; height: 24px; text-align: center; }
+  .proto span { position: absolute; left: 0; right: 0; font: 400 20px/1 "JetBrains Mono"; color: var(--ambar); }
+  .tablero { left: 1110px; top: 300px; width: 420px; height: 470px; padding: 22px; }
+  .kpis { display: flex; gap: 12px; margin: 16px 0; }
+  .kpis div { flex: 1; padding: 12px; border-radius: 12px; background: #0f2242; font: 400 14px/1.2 "JetBrains Mono"; color: var(--tenue); }
+  .kpis b { display: block; margin-top: 6px; font: 500 28px/1 "Outfit"; color: var(--texto); }
+  .alerta { position: absolute; left: 22px; right: 22px; padding: 14px 16px; border-radius: 12px; font: 600 18px/1.3 "Manrope"; }
+</style></head>
+<body>
+  <div class="cab"><div class="num">SERVICIO 05</div><h1>IoT</h1><div class="bajada">Del sensor al tablero, en tiempo real.</div></div>
+
+  <svg width="1600" height="900" style="position:absolute;inset:0">
+    <!-- Estación: mástil, sensor y panel -->
+    <path class="neon" d="M205 590 V 330 M150 360 H260 M205 330 l-30 -24 M205 330 l30 -24" />
+    <rect x="178" y="390" width="54" height="70" rx="10" class="neon" /><circle cx="205" cy="425" r="10" class="neon" />
+    <path class="tenue" d="M120 590 H290" />
+    <!-- Caminos del dato -->
+    <path class="tenue" d="M300 450 C 360 450, 370 470, 430 470" /><path class="neon" d="M300 450 C 360 450, 370 470, 430 470" data-traza="0.6" data-dura=".5" />
+    <path class="tenue" d="M610 470 C 680 470, 690 470, 760 470" /><path class="neon" d="M610 470 C 680 470, 690 470, 760 470" data-traza="1.2" data-dura=".5" />
+    <path class="tenue" d="M1010 470 H1110" /><path class="neon" d="M1010 470 H1110" data-traza="1.8" data-dura=".5" />
+    <path d="M1110 700 C 900 780, 700 760, 560 560" fill="none" stroke="rgb(74 222 128 / .25)" stroke-width="2" stroke-dasharray="8 8" />
+    <!-- Nube -->
+    <path class="neon" d="M800 520 h170 a50 50 0 0 0 0 -100 a70 70 0 0 0 -132 -22 a55 55 0 0 0 -38 122 z" data-traza="1.4" data-dura=".8" />
+  </svg>
+
+  <div class="caja lect" data-en="0.2">
+    <div class="fila">Temperatura <span class="valor"><b data-en="0.2" data-sale="2.9" data-desde="none">26,5 °C</b><b data-en="2.9" data-sale="5.4" data-desde="none">26,8 °C</b><b data-en="5.4" data-desde="none">27,1 °C</b></span></div>
+    <div class="fila">Humedad <span class="valor"><b data-en="0.2" data-sale="2.9" data-desde="none">62 %</b><b data-en="2.9" data-sale="5.4" data-desde="none">58 %</b><b data-en="5.4" data-desde="none">55 %</b></span></div>
+    <div class="fila">Viento <span class="valor"><b data-en="0.2" data-sale="4" data-desde="none">4 km/h</b><b data-en="4" data-desde="none">6 km/h</b></span></div>
+  </div>
+
+  <div class="caja" style="left:430px;top:400px;width:180px;height:140px;padding:18px" data-en="0.4">
+    <div class="titulo">Dispositivo</div><span class="sub">firmware propio</span>
+    <div class="onda" style="right:-30px;top:-30px;width:70px;height:70px"></div>
+    <div class="onda" style="right:-30px;top:-30px;width:70px;height:70px;animation-delay:-1s"></div>
+  </div>
+
+  <div style="position:absolute;left:800px;top:400px;width:210px;height:150px;text-align:center" data-en="1.4">
+    <div class="titulo" style="margin-top:50px">Nube</div>
+    <div class="proto"><span data-en="1.6" data-sale="3.6" data-desde="translateY(10px)">MQTT</span><span data-en="3.6" data-sale="5.6" data-desde="translateY(10px)">CoAP</span><span data-en="5.6" data-desde="translateY(10px)">HTTP</span></div>
+  </div>
+
+  <div class="caja tablero" data-en="1.9">
+    <div class="titulo">Tablero</div><span class="sub">monitoreo y alertas</span>
+    <div class="kpis"><div>Estaciones<b>12</b></div><div>En línea<b style="color:var(--verde)">12</b></div><div>Lecturas<b>2.4k</b></div></div>
+    <svg width="376" height="120"><path class="tenue" d="M0 110 H376" /><path class="neon" d="M0 80 C 40 70, 60 90, 100 76 S 160 40, 200 56 260 90, 300 70 350 30, 376 40" data-traza="2.2" data-dura="1.4" /></svg>
+    <div class="alerta" style="top:330px;border:1.5px solid var(--ambar);color:#ffd9a0;background:rgb(242 180 90 / .1)" data-en="4.4">⚠ Humedad del suelo por debajo del 56 %</div>
+    <div class="alerta" style="top:396px;border:1.5px solid var(--verde);color:#c9f7da;background:rgb(74 222 128 / .08)" data-en="5.6">✓ Riego activado de forma remota</div>
+  </div>
+
+  <div style="position:absolute;inset:0" data-en="2.3" data-desde="none">
+    <i class="paquete" style="offset-path:path('M300 450 C 360 450, 370 470, 430 470');animation:recorre 2s linear infinite"></i>
+    <i class="paquete" style="offset-path:path('M610 470 C 680 470, 690 470, 760 470');animation:recorre 2s linear infinite -.6s"></i>
+    <i class="paquete" style="offset-path:path('M1010 470 H1110');animation:recorre 2s linear infinite -1.2s"></i>
+  </div>
+  <i class="paquete" style="background:var(--verde);box-shadow:0 0 10px var(--verde),0 0 26px rgb(74 222 128 / .7);offset-path:path('M1110 700 C 900 780, 700 760, 560 560');animation:vuelve 8s linear infinite"></i>
+  <style>@keyframes vuelve { 0%, 70% { offset-distance: 0%; opacity: 0; } 72% { opacity: 1; } 88% { offset-distance: 100%; opacity: 1; } 90%, 100% { offset-distance: 100%; opacity: 0; } }</style>
+
+  <div class="chips" style="left:auto;right:70px;bottom:44px"><span>Sensores</span><span>Firmware</span><span>MQTT · CoAP · HTTP</span><span>Tableros</span></div>
+  <script src="base.js"></script>
+</body></html>

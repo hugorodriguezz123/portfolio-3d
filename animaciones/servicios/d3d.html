@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Diseño 3D</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .escena { position: absolute; left: 120px; top: 330px; width: 420px; height: 420px; perspective: 1100px; }
+  .giro { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; animation: gira3d 8s linear infinite; }
+  .giro.interno { animation: gira3d-inv 8s linear infinite; }
+  @keyframes gira3d { from { transform: rotateX(-24deg) rotateY(0deg); } to { transform: rotateX(-24deg) rotateY(360deg); } }
+  @keyframes gira3d-inv { from { transform: rotateX(30deg) rotateY(0deg) rotateZ(0deg); } to { transform: rotateX(30deg) rotateY(-360deg) rotateZ(360deg); } }
+  .cara { position: absolute; border: 3px solid var(--azul); background: rgb(76 157 255 / .05); box-shadow: 0 0 14px rgb(76 157 255 / .6), inset 0 0 14px rgb(76 157 255 / .25); }
+  .grande .cara { width: 240px; height: 240px; left: -120px; top: -120px; }
+  .chico .cara { width: 110px; height: 110px; left: -55px; top: -55px; border-color: var(--ambar); background: rgb(242 180 90 / .07); box-shadow: 0 0 14px rgb(242 180 90 / .6), inset 0 0 12px rgb(242 180 90 / .25); }
+  .sombra { position: absolute; left: 50%; bottom: 0; width: 300px; height: 40px; margin-left: -150px; border-radius: 50%; background: radial-gradient(rgb(76 157 255 / .35), transparent 70%); }
+  .etapa { position: absolute; left: 620px; width: 360px; padding: 18px 22px; }
+  .etapa strong { font: 600 24px/1 "Manrope"; } .etapa .etq { display: block; margin-top: 8px; font-size: 14px; text-transform: none; letter-spacing: 0; color: var(--tenue); }
+  .barra { margin-top: 14px; height: 10px; border-radius: 5px; background: #13264a; overflow: hidden; }
+  .barra i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--azul), var(--cian)); transform-origin: left; }
+  @keyframes llena { 0%, 22% { transform: scaleX(0); } 42%, 92% { transform: scaleX(1); } 96%, 100% { transform: scaleX(0); } }
+  .impresora { left: 1060px; top: 300px; width: 470px; height: 470px; }
+  .boquilla { position: absolute; left: 0; top: 0; width: 34px; height: 30px; margin-left: -17px; background: var(--ambar); clip-path: polygon(0 0, 100% 0, 70% 70%, 50% 100%, 30% 70%); filter: drop-shadow(0 0 8px var(--ambar)); }
+  @keyframes recorre-x { 0%, 100% { transform: translateX(150px); } 50% { transform: translateX(320px); } }
+  @keyframes sube { 0%, 30% { transform: translateY(0); } 90% { transform: translateY(-210px); } 96%, 100% { transform: translateY(0); } }
+  @keyframes imprime { 0%, 30% { clip-path: inset(100% 0 0 0); } 90% { clip-path: inset(0 0 0 0); } 96%, 100% { clip-path: inset(100% 0 0 0); } }
+</style></head>
+<body>
+  <div class="cab"><div class="num">SERVICIO 06</div><h1>Diseño 3D</h1><div class="bajada">Modelado, render e impresión 3D.</div></div>
+
+  <div class="escena" data-en="0.2" data-desde="scale(.85)">
+    <div class="sombra"></div>
+    <div class="giro grande">
+      <div class="cara" style="transform:translateZ(120px)"></div><div class="cara" style="transform:rotateY(180deg) translateZ(120px)"></div>
+      <div class="cara" style="transform:rotateY(90deg) translateZ(120px)"></div><div class="cara" style="transform:rotateY(-90deg) translateZ(120px)"></div>
+      <div class="cara" style="transform:rotateX(90deg) translateZ(120px)"></div><div class="cara" style="transform:rotateX(-90deg) translateZ(120px)"></div>
+    </div>
+    <div class="giro interno chico">
+      <div class="cara" style="transform:translateZ(55px)"></div><div class="cara" style="transform:rotateY(180deg) translateZ(55px)"></div>
+      <div class="cara" style="transform:rotateY(90deg) translateZ(55px)"></div><div class="cara" style="transform:rotateY(-90deg) translateZ(55px)"></div>
+      <div class="cara" style="transform:rotateX(90deg) translateZ(55px)"></div><div class="cara" style="transform:rotateX(-90deg) translateZ(55px)"></div>
+    </div>
+  </div>
+
+  <div class="caja etapa" style="top:330px" data-en="0.5"><strong>Modelado</strong><span class="etq">Productos, piezas y espacios</span></div>
+  <div class="caja etapa" style="top:470px" data-en="1.4"><strong>Render</strong><span class="etq">Catálogo y presentaciones</span><div class="barra"><i style="animation:llena 8s linear infinite"></i></div></div>
+  <div class="caja etapa" style="top:630px" data-en="2.3"><strong>Impresión 3D</strong><span class="etq">Prototipos y piezas finales</span></div>
+
+  <div class="impresora" style="position:absolute" data-en="2.2">
+    <svg width="470" height="470" style="position:absolute;inset:0">
+      <path class="neon" d="M60 30 H410 V440 H60 Z" /><path class="tenue" d="M60 90 H410" />
+      <path d="M120 430 H350" stroke="#4c9dff" stroke-width="6" />
+      <g style="clip-path:inset(100% 0 0 0);animation:imprime 8s linear infinite">
+        <path d="M175 426 C 168 380, 205 350, 200 300 C 196 262, 214 232, 235 220 C 256 232, 274 262, 270 300 C 265 350, 302 380, 295 426 Z" fill="rgb(242 180 90 / .22)" stroke="#f2b45a" stroke-width="3" style="filter:drop-shadow(0 0 8px #f2b45a)" />
+        <path d="M180 410 H290 M178 390 H292 M184 370 H286 M192 350 H278 M198 330 H272 M200 310 H270 M200 290 H270 M203 270 H267 M210 250 H260 M220 234 H250" stroke="rgb(242 180 90 / .45)" stroke-width="1.5" />
+      </g>
+    </svg>
+    <div style="position:absolute;left:0;top:400px;animation:sube 8s linear infinite"><div class="boquilla" style="animation:recorre-x 1s ease-in-out infinite"></div></div>
+  </div>
+
+  <div class="chips" style="left:auto;right:70px;bottom:44px"><span>Modelado</span><span>Render</span><span>Web 3D</span><span>Impresión 3D</span></div>
+  <script src="base.js"></script>
+</body></html>

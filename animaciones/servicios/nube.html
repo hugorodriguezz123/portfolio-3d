@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Despliegue en la nube</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .paso { position: absolute; top: 330px; width: 200px; text-align: center; }
+  .paso .bola { width: 74px; height: 74px; margin: 0 auto 14px; border-radius: 50%; border: 2.5px solid rgb(76 157 255 / .5); background: #0b1830;
+    display: grid; place-items: center; font: 500 26px/1 "Outfit"; color: #8ec5ff; }
+  .paso .luz { position: absolute; left: 50%; top: 0; width: 74px; height: 74px; margin-left: -37px; border-radius: 50%; border: 3px solid var(--ambar); box-shadow: 0 0 22px rgb(242 180 90 / .7), inset 0 0 18px rgb(242 180 90 / .35); }
+  .nodo { width: 230px; padding: 20px 22px; } .nodo strong { font: 600 24px/1.1 "Manrope", sans-serif; }
+  .nodo .etq { display: block; margin-top: 8px; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--tenue); }
+  .cont { position: absolute; width: 168px; height: 52px; border-radius: 12px; border: 2px solid rgb(94 225 255 / .65); background: rgb(14 40 70 / .9);
+    display: flex; align-items: center; gap: 10px; padding: 0 14px; font: 400 15px/1 "JetBrains Mono"; color: #cfefff; box-shadow: 0 0 16px rgb(94 225 255 / .25); }
+  .cont i { width: 12px; height: 12px; border-radius: 50%; background: var(--verde); box-shadow: 0 0 10px var(--verde); animation: late 1.6s infinite; }
+  .estado { position: absolute; right: 70px; top: 64px; display: flex; gap: 16px; }
+  .estado .caja { position: static; padding: 16px 22px; text-align: right; }
+  .estado b { display: block; font: 500 40px/1 "Outfit"; color: var(--verde); text-shadow: 0 0 12px rgb(74 222 128 / .5); }
+</style></head>
+<body>
+  <div class="cab"><div class="num">SERVICIO 03</div><h1 data-t-en="Cloud<br>deployment">Despliegue<br>en la nube</h1></div>
+  <div class="estado">
+    <div class="caja" data-en="3.2"><span class="etq">Disponible</span><b>99,9 %</b></div>
+    <div class="caja" data-en="3.5"><span class="etq">Certificado</span><b style="color:var(--ambar);text-shadow:0 0 12px rgb(242 180 90 / .5)">SSL</b></div>
+  </div>
+
+  <svg width="1600" height="900" style="position:absolute;inset:0">
+    <path class="tenue" d="M207 367 H1393" /><path class="neon" d="M207 367 H1393" data-traza="0.3" data-dura="2.6" />
+    <path class="tenue" d="M300 610 H420" /><path class="neon" d="M300 610 H420" data-traza="3.2" data-dura=".4" />
+    <path class="tenue" d="M650 610 C 700 610, 700 530, 760 530 M650 610 H760 M650 610 C 700 610, 700 690, 760 690" />
+    <path class="neon" d="M650 610 C 700 610, 700 530, 760 530 M650 610 H760 M650 610 C 700 610, 700 690, 760 690" data-traza="3.6" data-dura=".5" />
+    <path class="tenue" d="M928 530 C 990 530, 990 610, 1050 610 M928 610 H1050 M928 690 C 990 690, 990 610, 1050 610" />
+    <path class="neon" d="M928 530 C 990 530, 990 610, 1050 610 M928 610 H1050 M928 690 C 990 690, 990 610, 1050 610" data-traza="4.1" data-dura=".5" />
+    <path class="tenue" d="M1280 610 H1340" stroke-dasharray="8 8" />
+  </svg>
+
+  <!-- Pipeline: cada etapa se enciende en orden -->
+  <div class="paso" style="left:107px" data-en="0.2"><div class="bola">01</div><span class="etq">Código</span></div>
+  <div class="paso" style="left:403px" data-en="0.8"><div class="bola">02</div><span class="etq">Build</span></div>
+  <div class="paso" style="left:700px" data-en="1.4"><div class="bola">03</div><span class="etq">Pruebas</span></div>
+  <div class="paso" style="left:996px" data-en="2.0"><div class="bola">04</div><span class="etq">Despliegue</span></div>
+  <div class="paso" style="left:1293px" data-en="2.6"><div class="bola">05</div><span class="etq">Monitoreo</span></div>
+  <div class="paso" style="left:107px"><div class="luz" data-en="0.5" data-sale="1.1" data-desde="scale(.6)"></div></div>
+  <div class="paso" style="left:403px"><div class="luz" data-en="1.1" data-sale="1.7" data-desde="scale(.6)"></div></div>
+  <div class="paso" style="left:700px"><div class="luz" data-en="1.7" data-sale="2.3" data-desde="scale(.6)"></div></div>
+  <div class="paso" style="left:996px"><div class="luz" data-en="2.3" data-sale="2.9" data-desde="scale(.6)"></div></div>
+  <div class="paso" style="left:1293px"><div class="luz" data-en="2.9" data-desde="scale(.6)"></div></div>
+
+  <!-- Arquitectura -->
+  <div class="caja nodo" style="left:70px;top:560px" data-en="3.0"><strong>Usuarios</strong><span class="etq">Dominio y HTTPS</span></div>
+  <div class="caja nodo" style="left:420px;top:560px" data-en="3.3"><strong>Balanceador</strong><span class="etq">Reparte el tráfico</span></div>
+  <div class="cont" style="left:760px;top:504px" data-en="3.7"><i></i>app · 1</div>
+  <div class="cont" style="left:760px;top:584px" data-en="3.8"><i></i>app · 2</div>
+  <div class="cont" style="left:760px;top:664px" data-en="5.0" data-sale="7.0" data-desde="scale(.7)"><i></i>app · 3</div>
+  <div class="etq" style="position:absolute;left:760px;top:744px;color:var(--ambar)" data-en="5.0" data-sale="7.0">+ escalado automático</div>
+  <div class="caja nodo" style="left:1050px;top:560px" data-en="4.2"><strong>Base de datos</strong><span class="etq">Gestionada</span></div>
+  <div class="caja nodo" style="left:1340px;top:560px;width:190px;border-style:dashed" data-en="4.5"><strong>Respaldo</strong><span class="etq">Diario</span></div>
+
+  <div style="position:absolute;inset:0" data-en="4.4" data-desde="none">
+    <i class="paquete" style="offset-path:path('M300 610 H420');animation:recorre 1s linear infinite"></i>
+    <i class="paquete" style="offset-path:path('M650 610 C 700 610, 700 530, 760 530');animation:recorre 2s linear infinite"></i>
+    <i class="paquete" style="offset-path:path('M650 610 H760');animation:recorre 2s linear infinite -.7s"></i>
+    <i class="paquete" style="offset-path:path('M928 610 H1050');animation:recorre 2s linear infinite -1.3s"></i>
+  </div>
+
+  <div class="chips"><span>Servidores</span><span>Contenedores</span><span>CI/CD</span><span>Monitoreo</span><span>Respaldos</span></div>
+  <script src="base.js"></script>
+</body></html>
