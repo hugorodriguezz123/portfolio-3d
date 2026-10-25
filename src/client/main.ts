@@ -189,7 +189,7 @@ function oficina() {
   function marcarHover() {
     $$<HTMLElement>("[data-item]", app).forEach((a) => a.classList.toggle("encima", s.hover === a.dataset.item && s.estado !== a.dataset.item));
     if (hudTag && s.hover) {
-      const nombre = $(`[data-item="${s.hover}"] span`, app)?.textContent ?? s.hover;
+      const nombre = $(`[data-item="${s.hover}"] .item-ico + span`, app)?.textContent || s.hover;   // el primer span es el ícono
       hudTag.textContent = `${nombre}  ·  ${hudTag.dataset.abrir ?? ""}`;
     }
   }
@@ -345,20 +345,30 @@ function oficina() {
 
   // Carga del motor 3D
   const pct = $("[data-carga-pct]", app), barra = $("[data-carga-barra]", app);
-  const errorCarga = () => { $("[data-carga-error]", app)?.removeAttribute("hidden"); if (pct) pct.textContent = ""; };
-  // Descarga: 0–90 % de la barra; preparar la escena: el último 10 %
-  const mostrarAvance = (p: number) => {
-    const v = Math.min(99, Math.round(p * 100));
+  // Descarga: 0–75 % de la barra; preparar la escena: el último 25 %. Compilar los materiales no informa avance,
+  // así que la barra sigue subiendo despacio hacia un techo un poco más allá del avance real en vez de quedarse quieta.
+  let real = 0, mostrado = 0;
+  const pintarAvance = (v: number) => {
     if (pct) pct.textContent = `${v}%`;
     if (barra) barra.style.width = `${v}%`;
   };
-  alAvance = (p) => mostrarAvance(p * 0.9);
+  const relojCarga = setInterval(() => {
+    const atrasado = real - mostrado > 0.005;
+    const meta = atrasado ? real : real + (0.99 - real) * 0.5;
+    mostrado += (meta - mostrado) * (atrasado ? 0.3 : 0.015);
+    pintarAvance(Math.min(99, Math.floor(mostrado * 100)));
+  }, 100);
+  const mostrarAvance = (p: number) => { real = Math.max(real, p); };
+  const errorCarga = () => { clearInterval(relojCarga); $("[data-carga-error]", app)?.removeAttribute("hidden"); if (pct) pct.textContent = ""; };
+  alAvance = (p) => mostrarAvance(p * 0.75);
   (motor ?? import("./escena/escena.js")).then(({ crear, crearMapaColombia }) => {
     crearMapa = crearMapaColombia;
     ctrl = crear({
       canvas: $("[data-escena]", app), hud: $("[data-hud]", app), modelos: MODELOS, draco: "/draco/", archivos: descargas,
-      alProgreso: (p: number) => mostrarAvance(0.9 + p * 0.1),
+      alProgreso: (p: number) => mostrarAvance(0.75 + p * 0.25),
       alListo: () => {
+        clearInterval(relojCarga);
+        pintarAvance(100);
         s.listo = true;
         app.classList.add("listo");
         entrar?.removeAttribute("aria-disabled");

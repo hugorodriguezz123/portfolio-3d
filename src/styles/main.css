@@ -128,10 +128,10 @@ button { font: inherit; color: inherit; }
 .barra-carga span { display: block; width: 0; height: 100%; background: var(--neon); box-shadow: 0 0 8px var(--neon); transition: width .25s ease; }
 .carga-error { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--suave); font-size: 14px; }
 .carga-error[hidden] { display: none; }   /* sin esto, display:flex anulaba el atributo hidden y el aviso se veía siempre */
-/* Aviso para iniciar: aparece en el centro, donde estaba la carga, cuando la oficina está lista */
+/* Aviso para iniciar: aparece abajo y centrado cuando la oficina está lista; en fila y pegado al borde para no tapar el texto de la portada */
 .iniciar { display: none; }
-.modo-3d .iniciar { position: absolute; left: 50%; top: 50%; z-index: 3; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 12px;
-  background: none; border: 0; cursor: pointer; padding: 12px 18px; color: #a8d2ff; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; text-shadow: 0 1px 12px rgb(0 0 0 / .85); }
+.modo-3d .iniciar { position: absolute; left: 50%; bottom: 14px; z-index: 3; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; white-space: nowrap;
+  background: none; border: 0; cursor: pointer; padding: 0; color: #a8d2ff; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; text-shadow: 0 1px 12px rgb(0 0 0 / .85); }
 .tecla-enter { padding: 10px 18px; border-radius: 10px; border: 1.5px solid rgb(120 185 255 / .75); background: rgb(8 14 26 / .7); color: var(--neon-claro); font-size: 15px; letter-spacing: .06em; text-transform: none;
   box-shadow: 0 0 16px rgb(76 157 255 / .5), inset 0 -3px 0 rgb(76 157 255 / .35); animation: late 1.6s ease-in-out infinite; }
 .iniciar-tactil { display: none; }
@@ -305,7 +305,7 @@ html:not(.modo-3d) .app { display: none; }     /* sin 3D se ve la vista clásica
   .modo-3d .hero { left: 16px; right: 16px; width: auto; bottom: 56px; gap: 16px; }
   .h1 { font-size: 44px; }
   .hero .lead { font-size: 16px; }
-  .modo-3d .iniciar { top: 30%; }
+  .modo-3d .iniciar { top: 30%; bottom: auto; transform: translate(-50%, -50%); flex-direction: column; }   /* abajo está el texto de la portada */
   /* Barra de navegación del celular: íconos sobre cada nombre, borde de neón y desvanecido que invita a deslizar */
   .modo-3d .menu { left: 0; right: 0; top: auto; bottom: 0; perspective: none; }
   .modo-3d .letrero { width: auto; flex-direction: row; align-items: stretch; overflow-x: auto; gap: 4px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom));

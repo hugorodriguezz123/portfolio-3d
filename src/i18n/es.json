@@ -397,7 +397,7 @@
         "imagen": "/images/proyectos/vianne-tienda.webp"
       },
       {
-        "nombre": "Vianne",
+        "nombre": "App Healthcare",
         "area": "Desarrollo mobile · Backend",
         "cliente": "Proyecto propio",
         "anio": "2026",
@@ -418,7 +418,7 @@
           "Redis"
         ],
         "servicio": "mobile",
-        "imagen": "/images/proyectos/vianne.webp"
+        "video": "/videos/app-salud.mp4"
       },
       {
         "nombre": "App de eventos",
@@ -442,7 +442,7 @@
           "Redis"
         ],
         "servicio": "mobile",
-        "imagen": "/images/proyectos/eventos.webp"
+        "video": "/videos/app-eventos.mp4"
       },
       {
         "nombre": "App de moda",
