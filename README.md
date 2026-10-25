@@ -33,6 +33,15 @@ bun run start        # sirve dist/ como en producción (http://localhost:3000)
 
 Los textos entre corchetes, como `[TU CORREO]` o `[Proyecto 2]`, son datos que faltan por completar.
 
+### Vista clásica (sin 3D)
+
+La home tiene dos vistas con el mismo contenido: la **oficina 3D** (computadores) y la **vista clásica**
+(`src/sections/clasica.ts` y `src/styles/clasica.css`): portada, nosotros, servicios, portafolio, río de
+tecnologías y contacto. Celulares y tabletas abren la clásica; cualquiera puede cambiar con **"Ver en 3D"** /
+**"Ver sin 3D"** (la elección se recuerda) o con `?modo=3d` / `?modo=clasico`. Sin JavaScript o sin WebGL se
+ve la clásica. Los íconos del río salen de `src/lib/tecnologias-iconos.ts` (Simple Icons, CC0) y se publican
+como `/images/tecnologias.svg`; el campo `portada` de un proyecto fija su imagen en el portafolio.
+
 ### Proyectos y videos en la pantalla central
 
 Cada proyecto de `src/i18n/es.json` → `proyectos.items` tiene un campo `video`. Copia el archivo a

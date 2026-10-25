@@ -43,7 +43,7 @@ export default defineConfig({
   },
 
   build: {
-    inlineCss: true,
+    inlineCss: false,   // pasa de 30 KB (vista clásica + oficina): mejor como archivo cacheado
     imageWidths: [480, 960, 1440],
   },
 });

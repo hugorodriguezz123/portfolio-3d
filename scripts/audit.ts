@@ -34,7 +34,8 @@ for (const [path, html] of pages) {
     if (hash && !p && !ids.has(hash)) errors.push(`${path}: ancla inexistente #${hash}`);
   }
   const kb = Buffer.byteLength(html) / 1024;
-  if (kb > 100) errors.push(`${path}: HTML de ${kb.toFixed(0)} KB (revisa CSS en línea/SVGs)`);
+  // La home lleva dos vistas (clásica y oficina 3D) con el mismo contenido: su límite es mayor
+  if (kb > (path.endsWith("/") && path.split("/").length <= 3 && !path.includes("privacidad") ? 130 : 100)) errors.push(`${path}: HTML de ${kb.toFixed(0)} KB (revisa CSS en línea/SVGs)`);
 }
 
 if (errors.length) { console.error(`✗ ${errors.length} problemas:\n  ${[...new Set(errors)].join("\n  ")}`); process.exit(1); }

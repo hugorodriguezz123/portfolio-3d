@@ -15,6 +15,37 @@ const MODELOS = {
   personajes: [`/modelos/personaje1.glb?v=${VERSION_MODELOS}`, `/modelos/personaje2.glb?v=${VERSION_MODELOS}`],
 };
 
+/**
+ * Descargas de la oficina 3D: empiezan apenas carga la página, en paralelo con el código del motor
+ * (antes esperaban a que el motor estuviera listo). Cada una informa su avance para la barra de carga.
+ */
+const avanceDescargas: number[] = [0, 0, 0];
+const PESOS_MB = [4.1, 0.7, 0.72];
+let alAvance: ((p: number) => void) | null = null;
+function descargar(url: string, k: number): Promise<ArrayBuffer> {
+  return fetch(url).then(async (res) => {
+    if (!res.ok || !res.body) throw new Error(`${url}: ${res.status}`);
+    const total = Number(res.headers.get("content-length")) || PESOS_MB[k]! * 1e6;
+    const lector = res.body.getReader(), partes: Uint8Array[] = [];
+    let recibido = 0;
+    for (;;) {
+      const { done, value } = await lector.read();
+      if (done) break;
+      partes.push(value); recibido += value.length;
+      avanceDescargas[k] = Math.min(1, recibido / total);
+      alAvance?.(avanceDescargas.reduce((a, v, i) => a + v * PESOS_MB[i]!, 0) / PESOS_MB.reduce((a, b) => a + b, 0));
+    }
+    const buf = new Uint8Array(recibido);
+    let o = 0; for (const p of partes) { buf.set(p, o); o += p.length; }
+    return buf.buffer;
+  });
+}
+const descargas = raiz.classList.contains("modo-3d") && webgl()
+  ? [descargar(MODELOS.oficina, 0), ...MODELOS.personajes.map((u, i) => descargar(u, i + 1))]
+  : null;
+descargas?.forEach((d) => d.catch(() => {}));   // el error se informa al usar la descarga
+const motor = descargas ? import("./escena/escena.js") : null;   // el código del motor también desde ya
+
 type Estado = "portada" | "oficina" | "servicios" | "proyectos" | "tecnologias" | "nosotros" | "taller" | "contacto";
 const SECCIONES: Estado[] = ["servicios", "proyectos", "tecnologias", "nosotros", "taller", "contacto"];
 /** Secciones donde el letrero muestra el menú principal (en servicios, proyectos y nosotros muestra su propia lista; en tecnologías se oculta). */
@@ -33,9 +64,11 @@ document.addEventListener("click", (ev) => {
 }, true);
 
 /* ---------- Formulario de contacto ---------- */
+/** Hay un formulario en el panel 3D y otro en la vista clásica: se preparan los dos. */
 function formularioContacto() {
-  const form = $<HTMLFormElement>("[data-contact-form]");
-  if (!form) return;
+  $$<HTMLFormElement>("[data-contact-form]").forEach(prepararFormulario);
+}
+function prepararFormulario(form: HTMLFormElement) {
   const estado = $("[data-form-status]", form)!;
   const boton = $<HTMLButtonElement>("button[type=submit]", form)!;
   const ts = form.elements.namedItem("_ts") as HTMLInputElement;
@@ -80,10 +113,21 @@ function formularioContacto() {
 
 /** Preselecciona el servicio en el formulario (botones "Cotizar"). */
 function servicioEnFormulario(id: string) {
-  const sel = $<HTMLSelectElement>("[data-servicio-form]");
-  const op = sel && $<HTMLOptionElement>(`option[data-id="${id}"]`, sel);
-  if (sel && op) sel.value = op.value;
+  $$<HTMLSelectElement>("[data-servicio-form]").forEach((sel) => {
+    const op = $<HTMLOptionElement>(`option[data-id="${id}"]`, sel);
+    if (op) sel.value = op.value;
+  });
 }
+
+/* ---------- Modo 3D o clásico ---------- */
+// La elección se guarda (localStorage "modo") y el <head> la aplica antes de pintar en la próxima carga.
+document.addEventListener("click", (ev) => {
+  const b = (ev.target as Element).closest<HTMLElement>("[data-cambiar-modo]");
+  if (!b) return;
+  ev.preventDefault();
+  try { localStorage.setItem("modo", b.dataset.cambiarModo!); } catch { /* sin almacenamiento */ }
+  location.href = `${location.pathname}?modo=${b.dataset.cambiarModo}${location.hash}`;
+});
 
 /* ---------- Oficina 3D ---------- */
 function webgl() {
@@ -268,7 +312,7 @@ function oficina() {
     }
     if (x) { ev.preventDefault(); abrirMapa(); return; }
     if (e === "portada") {
-      if (FLECHAS[k] || k === "Enter" || k === " " || k === "PageDown") { ev.preventDefault(); ir("oficina"); }
+      if (k === "Enter") { ev.preventDefault(); ir("oficina"); }   // solo Enter (o los botones) inicia el recorrido
       return;
     }
     if ((k === "ArrowLeft" || k === "ArrowRight") && paso(k === "ArrowLeft" ? -1 : 1)) { ev.preventDefault(); return; }
@@ -284,8 +328,8 @@ function oficina() {
     if (ahora - ultimo < 1100) return;
     ultimo = ahora;
     const e = s.estado;
-    if (dir > 0) { if (e === "portada") ir("oficina"); }
-    else if (e === "oficina") ir("portada");
+    if (e === "portada") return;   // desde la portada se entra solo con Enter o con los botones
+    if (dir < 0 && e === "oficina") ir("portada");
     else if (e !== "portada") ir("oficina");
   };
   const enPanel = (t: EventTarget | null) => !!(t as Element | null)?.closest?.("[data-scroll]");
@@ -302,15 +346,18 @@ function oficina() {
   // Carga del motor 3D
   const pct = $("[data-carga-pct]", app), barra = $("[data-carga-barra]", app);
   const errorCarga = () => { $("[data-carga-error]", app)?.removeAttribute("hidden"); if (pct) pct.textContent = ""; };
-  import("./escena/escena.js").then(({ crear, crearMapaColombia }) => {
+  // Descarga: 0–90 % de la barra; preparar la escena: el último 10 %
+  const mostrarAvance = (p: number) => {
+    const v = Math.min(99, Math.round(p * 100));
+    if (pct) pct.textContent = `${v}%`;
+    if (barra) barra.style.width = `${v}%`;
+  };
+  alAvance = (p) => mostrarAvance(p * 0.9);
+  (motor ?? import("./escena/escena.js")).then(({ crear, crearMapaColombia }) => {
     crearMapa = crearMapaColombia;
     ctrl = crear({
-      canvas: $("[data-escena]", app), hud: $("[data-hud]", app), modelos: MODELOS, draco: "/draco/",
-      alProgreso: (p: number) => {
-        const v = Math.round(p * 100);
-        if (pct) pct.textContent = `${v}%`;
-        if (barra) barra.style.width = `${v}%`;
-      },
+      canvas: $("[data-escena]", app), hud: $("[data-hud]", app), modelos: MODELOS, draco: "/draco/", archivos: descargas,
+      alProgreso: (p: number) => mostrarAvance(0.9 + p * 0.1),
       alListo: () => {
         s.listo = true;
         app.classList.add("listo");
@@ -332,6 +379,8 @@ function oficina() {
     raiz.classList.add("sin-3d");
     cerrarMapa(); mapa3d?.destruir(); mapa3d = null;
     ctrl?.destruir(); ctrl = null;
+    vistaClasica();
+    scrollTo(0, 0);
   }
   aplicar();
 }
@@ -340,7 +389,37 @@ function oficina() {
 function modoDocumento() {
   raiz.classList.remove("modo-3d");
   raiz.classList.add("sin-3d");
+  vistaClasica();
+}
+
+/* ---------- Vista clásica ---------- */
+function vistaClasica() {
+  const raizCl = $(".clasica");
+  if (!raizCl || raiz.classList.contains("modo-3d")) return;
+  if (!webgl()) raiz.classList.add("sin-webgl");   // sin WebGL no se ofrece "Ver en 3D"
+  // Aparición al hacer scroll
+  const revelar = new IntersectionObserver((entradas) => entradas.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add("visible"); revelar.unobserve(e.target); }
+  }), { rootMargin: "0px 0px -8% 0px" });
+  $$(".revelar", raizCl).forEach((el) => revelar.observe(el));
+  // Videos de servicios y proyectos: se descargan y reproducen solo mientras se ven
+  const videos = new IntersectionObserver((entradas) => entradas.forEach((e) => {
+    const v = e.target as HTMLVideoElement;
+    if (e.isIntersecting) {
+      if (!v.src) { v.src = v.dataset.src!; v.addEventListener("playing", () => v.classList.add("en-curso"), { once: true }); }
+      v.play().catch(() => {});
+    } else v.pause();
+  }), { threshold: 0.35 });
+  $$<HTMLVideoElement>("video[data-src]", raizCl).forEach((v) => videos.observe(v));
+  // "Cotizar" y "Quiero algo así": preseleccionan el servicio; el menú del celular se cierra al elegir
+  raizCl.addEventListener("click", (ev) => {
+    const el = (ev.target as Element).closest<HTMLElement>("[data-cotizar], .cl-menu-lista a");
+    if (!el) return;
+    if (el.dataset.cotizar) servicioEnFormulario(el.dataset.cotizar);
+    $<HTMLDetailsElement>(".cl-menu", raizCl)?.removeAttribute("open");
+  });
 }
 
 formularioContacto();
+vistaClasica();
 oficina();

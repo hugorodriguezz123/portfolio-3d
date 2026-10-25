@@ -2,8 +2,10 @@
    JHS Software Solutions — estilos
    Dos modos para la home (src/sections/oficina.ts):
    - html.modo-3d          → oficina 3D a pantalla completa (lo activa el script del <head>)
-   - html:not(.modo-3d)    → modo documento: sin JavaScript o si el navegador no puede mostrar 3D
+   - html:not(.modo-3d)    → vista clásica (clasica.css): celulares, quien la elige, sin JavaScript o sin WebGL
    ===================================================================== */
+
+@import "./clasica.css";
 
 /* ===== Tokens ===== */
 :root {
@@ -46,9 +48,31 @@ button { font: inherit; color: inherit; }
 .not-found h1 { font-family: var(--f-display); }
 .skip-link { position: absolute; left: 1rem; top: -100px; z-index: 100; padding: .6rem 1rem; background: var(--neon); color: #04101f; border-radius: 8px; }
 .skip-link:focus { top: 1rem; }
-.site-footer { border-top: 1px solid var(--linea); padding-block: 1.6rem; color: var(--tenue); font-size: .9rem; }
-.footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
-.footer-inner p { margin: 0; }
+/* ===== Pie de página ===== */
+.site-footer { position: relative; padding-block: clamp(48px, 6vw, 72px) 0; background: #05070b; color: var(--tenue); font-size: 15px; }
+.site-footer::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, #2ee59d, var(--neon), #ff4d5a); opacity: .8; }
+.pie { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: clamp(28px, 4vw, 56px); }
+.pie-marca { display: flex; flex-direction: column; gap: 18px; }
+.pie-marca .marca { width: fit-content; }
+.pie-marca p { margin: 0; max-width: 34ch; line-height: 1.6; color: var(--suave); }
+.pie-col h2 { margin: 0 0 16px; font: 600 12px/1 var(--f-mono); letter-spacing: .16em; text-transform: uppercase; color: #2ee59d; }
+.pie-servicios h2 { color: #8ec5ff; }
+.pie-contacto h2 { color: #ff4d5a; }
+.pie-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.pie-col a, .pie-legal a { color: var(--suave); text-decoration: none; overflow-wrap: anywhere; }
+.pie-col a:hover, .pie-legal a:hover { color: var(--neon-claro); }
+.pie-legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: clamp(36px, 5vw, 56px); padding-block: 20px 24px; border-top: 1px solid var(--linea); font-size: 13px; }
+.pie-legal p { margin: 0; }
+@media (max-width: 900px) { .pie { grid-template-columns: 1fr 1fr; } .pie-marca { grid-column: 1 / -1; } }
+@media (max-width: 520px) { .pie { gap: 32px 20px; } .pie-contacto { grid-column: 1 / -1; } .pie-legal { flex-direction: column; } }
+/* Política de privacidad */
+.legal-pagina { padding-top: clamp(40px, 6vw, 72px); }
+.legal-intro { font-size: 18px; line-height: 1.65; color: var(--texto); }
+.legal-bloque { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--linea); }
+.legal-bloque h2 { margin: 0 0 12px; font: 600 20px/1.3 var(--f-cuerpo); color: var(--texto); }
+.legal-bloque p, .legal-bloque li { line-height: 1.7; }
+.legal-bloque ul { padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+.legal-bloque li::marker { color: #2ee59d; }
 .social { display: flex; gap: .25rem; list-style: none; margin: 0; padding: 0; }
 .social a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; color: var(--tenue); }
 
@@ -65,6 +89,7 @@ button { font: inherit; color: inherit; }
 .barra { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 28px; }
 .marca { display: flex; align-items: center; gap: 12px; color: var(--texto); text-decoration: none; }
 .barra-der { display: flex; align-items: center; gap: 12px; }
+.btn-modo { min-height: 40px; padding: 0 14px; font-size: 14px; }
 /* Selector de idioma: mismo lenguaje de neón que los botones */
 .idiomas { display: flex; padding: 3px; border-radius: 999px; border: 1px solid rgb(76 157 255 / .45); background: rgb(8 14 26 / .6); }
 .idiomas a { min-width: 40px; min-height: 36px; display: grid; place-items: center; padding: 0 10px; border-radius: 999px; font: 600 12px/1 var(--f-mono); letter-spacing: .08em; color: #8ec5ff; text-decoration: none; }
@@ -103,8 +128,19 @@ button { font: inherit; color: inherit; }
 .barra-carga span { display: block; width: 0; height: 100%; background: var(--neon); box-shadow: 0 0 8px var(--neon); transition: width .25s ease; }
 .carga-error { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--suave); font-size: 14px; }
 .carga-error[hidden] { display: none; }   /* sin esto, display:flex anulaba el atributo hidden y el aviso se veía siempre */
-.bajar { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: .08em; color: var(--suave); background: none; border: 0; cursor: pointer; padding: 8px 12px; }
-.bajar svg { animation: flota 1.8s ease-in-out infinite; }
+/* Aviso para iniciar: aparece en el centro, donde estaba la carga, cuando la oficina está lista */
+.iniciar { display: none; }
+.modo-3d .iniciar { position: absolute; left: 50%; top: 50%; z-index: 3; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 12px;
+  background: none; border: 0; cursor: pointer; padding: 12px 18px; color: #a8d2ff; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; text-shadow: 0 1px 12px rgb(0 0 0 / .85); }
+.tecla-enter { padding: 10px 18px; border-radius: 10px; border: 1.5px solid rgb(120 185 255 / .75); background: rgb(8 14 26 / .7); color: var(--neon-claro); font-size: 15px; letter-spacing: .06em; text-transform: none;
+  box-shadow: 0 0 16px rgb(76 157 255 / .5), inset 0 -3px 0 rgb(76 157 255 / .35); animation: late 1.6s ease-in-out infinite; }
+.iniciar-tactil { display: none; }
+/* En pantallas táctiles no hay Enter: el aviso es un botón con el mismo estilo de la tecla */
+@media (hover: none) {
+  .tecla-enter, .iniciar-teclado { display: none; }
+  .iniciar-tactil { display: inline-block; white-space: nowrap; padding: 10px 18px; border-radius: 999px; border: 1.5px solid rgb(120 185 255 / .75); background: rgb(8 14 26 / .75);
+    color: var(--neon-claro); font-size: 13px; box-shadow: 0 0 16px rgb(76 157 255 / .5); animation: late 1.6s ease-in-out infinite; }
+}
 
 /* ===== Letreros de neón (menús) ===== */
 .letrero { width: 274px; padding: 30px 22px 22px; border-radius: 6px; border: 1px solid var(--neon-borde);
@@ -121,6 +157,8 @@ button { font: inherit; color: inherit; }
 .item:hover, .item.encima { color: #a8d2ff; text-shadow: 0 0 2px rgb(200 230 255 / .9), 0 0 8px rgb(90 165 255 / .95), 0 0 22px rgb(30 105 255 / .6); }
 .item[aria-current="true"] { color: var(--neon-claro); font-weight: 500; text-shadow: 0 0 1px #fff, 0 0 6px rgb(120 185 255 / .95), 0 0 18px rgb(45 125 255 / .85), 0 0 36px rgb(30 105 255 / .5); }
 .tecla { font-size: 13px; opacity: .55; }
+.item-ico { display: none; }   /* los íconos solo se ven en la barra del celular */
+.pista-movil { display: none; }
 /* Proyecto adjunto (p. ej. la consola web de una app): colgado del anterior con una guía de neón */
 .item-anexo { position: relative; padding-left: 30px; font-size: 16px; min-height: 36px; margin-top: -6px; }
 .item-anexo::before { content: ""; position: absolute; left: 14px; top: -4px; width: 9px; height: 55%; border: solid rgb(120 185 255 / .55); border-width: 0 0 1.5px 1.5px; border-bottom-left-radius: 4px; }
@@ -181,13 +219,8 @@ button { font: inherit; color: inherit; }
    MODO DOCUMENTO (sin JS o sin 3D): todo el contenido una sección tras otra
    ===================================================================== */
 html:not(.modo-3d) [data-solo-3d] { display: none !important; }
-html:not(.modo-3d) .barra { position: absolute; left: 0; right: 0; top: 0; z-index: 3; }
-html:not(.modo-3d) .portada { min-height: min(100vh, 900px); display: flex; align-items: flex-end; padding: 120px max(28px, 5vw) 64px; }
-html:not(.modo-3d) .menu { width: min(100% - 2.5rem, 760px); margin: 48px auto 0; }
-html:not(.modo-3d) .menu .letrero { width: 100%; }
-html:not(.modo-3d) .paneles { width: min(100% - 2.5rem, 760px); margin: 32px auto 64px; display: flex; flex-direction: column; gap: 28px; }
-html:not(.modo-3d) .panel { padding: 28px; scroll-margin-top: 24px; }
-html:not(.modo-3d) .panel article + article { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--linea); }
+html:not(.modo-3d) .app { display: none; }     /* sin 3D se ve la vista clásica (clasica.css) */
+.modo-3d .clasica { display: none; }
 
 /* =====================================================================
    MODO 3D: la oficina ocupa la pantalla; main.ts muestra un elemento [data-vista] a la vez
@@ -202,14 +235,15 @@ html:not(.modo-3d) .panel article + article { margin-top: 32px; padding-top: 28p
 .modo-3d .barra > * { pointer-events: auto; }
 
 .modo-3d .portada { position: absolute; inset: 0; z-index: 1; pointer-events: none; animation: aparece .9s ease-out both; }
-.modo-3d .portada .hero, .modo-3d .portada .bajar { pointer-events: auto; }
+.modo-3d .portada .hero, .modo-3d .portada .iniciar { pointer-events: auto; }
 .modo-3d .hero { position: absolute; left: max(28px, 5vw); bottom: max(44px, 9vh); }
 /* Carga centrada, sin recuadro: solo el porcentaje en neón, la barra y el texto; se desvanece al terminar */
 .modo-3d .carga { position: absolute; left: 50%; top: 50%; z-index: 3; width: min(340px, calc(100% - 32px)); transform: translate(-50%, -50%); pointer-events: auto;
   text-shadow: 0 1px 12px rgb(0 0 0 / .8); }
 .modo-3d .app.listo .carga { opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility 0s linear .5s; }
 .modo-3d .app:not(.listo) [data-entrar] { opacity: .55; pointer-events: none; }
-.modo-3d .app:not(.listo) .bajar { visibility: hidden; }
+.modo-3d .app:not(.listo) .iniciar { visibility: hidden; }
+.modo-3d .app.listo .iniciar { animation: aparece .6s .4s ease-out both; }
 
 .modo-3d .menu { position: absolute; left: 28px; top: 92px; z-index: 2; perspective: 1100px; perspective-origin: 0% 50%; }
 .modo-3d .letrero { transform: rotateY(17deg); transform-origin: 0% 50%; animation: letrero-entra 1s ease-out both; }
@@ -263,26 +297,42 @@ html:not(.modo-3d) .panel article + article { margin-top: 32px; padding-top: 28p
 }
 @media (max-width: 760px) {
   .barra { padding: 14px 16px; }
+  .modo-3d .barra-der > .btn[data-ir="contacto"] { display: none; }   /* contacto ya está en la barra de abajo */
+  .barra-der { gap: 8px; }
   .marca-pila { font-size: 10px; }
-  .foto { width: 100%; height: 58%; -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%); -webkit-mask-composite: source-over; mask-image: linear-gradient(180deg, #000 55%, transparent 100%); mask-composite: add; }
+  .foto { left: 0; width: 100%; height: 58%; -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%); -webkit-mask-composite: source-over; mask-image: linear-gradient(180deg, #000 55%, transparent 100%); mask-composite: add; }
   .velo { background: linear-gradient(0deg, rgb(7 9 14 / .96) 0%, rgb(7 9 14 / .8) 38%, rgb(7 9 14 / 0) 64%); }
   .modo-3d .hero { left: 16px; right: 16px; width: auto; bottom: 56px; gap: 16px; }
   .h1 { font-size: 44px; }
   .hero .lead { font-size: 16px; }
-  .bajar { display: none; }
+  .modo-3d .iniciar { top: 30%; }
+  /* Barra de navegación del celular: íconos sobre cada nombre, borde de neón y desvanecido que invita a deslizar */
   .modo-3d .menu { left: 0; right: 0; top: auto; bottom: 0; perspective: none; }
-  .modo-3d .letrero { width: auto; flex-direction: row; overflow-x: auto; gap: 4px; padding: 8px 10px; border-radius: 14px 14px 0 0; border-bottom: 0; transform: none; animation: aparece .4s ease-out both; }
-  .modo-3d .letrero-tit, .modo-3d .letrero-sub, .modo-3d .neon-linea { display: none; }
-  .modo-3d .item { flex: 0 0 auto; font-size: 15px; white-space: nowrap; }
+  .modo-3d .letrero { width: auto; flex-direction: row; align-items: stretch; overflow-x: auto; gap: 4px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    border-radius: 16px 16px 0 0; border: 0; border-top: 1px solid rgb(76 157 255 / .55); transform: none; animation: aparece .4s ease-out both;
+    background: linear-gradient(180deg, #0f1626, #080b12); box-shadow: 0 -1px 16px rgb(45 125 255 / .45), 0 -18px 40px rgb(0 0 0 / .55);
+    scroll-snap-type: x proximity; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 86%, transparent); mask-image: linear-gradient(90deg, #000 86%, transparent); }
+  .modo-3d .letrero::-webkit-scrollbar { display: none; }
+  .modo-3d .letrero-tit, .modo-3d .letrero-sub, .modo-3d .neon-linea, .modo-3d .tecla { display: none; }
+  .modo-3d .item { flex: 0 0 auto; font-size: 14px; white-space: nowrap; scroll-snap-align: start; border-radius: 12px; }
+  .modo-3d .item-icono { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-width: 76px; min-height: 64px; padding: 8px 8px 6px; font-size: 12px; line-height: 1.1; }
+  .modo-3d .item-ico { display: grid; place-items: center; }
+  .modo-3d .item-ico svg { width: 24px; height: 24px; filter: drop-shadow(0 0 6px rgb(76 157 255 / .8)); }
+  .modo-3d .item[aria-current="true"] { background: rgb(76 157 255 / .16); box-shadow: inset 0 0 0 1px rgb(76 157 255 / .6); }
+  .modo-3d .item-volver { order: -1; }   /* en las listas, volver al menú queda al principio */
+  /* Aviso sobre la barra: hay un menú abajo */
+  .modo-3d .pista-movil { position: absolute; left: 50%; bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 2; display: flex; align-items: center; gap: 10px; transform: translateX(-50%);
+    margin: 0; padding: 10px 16px; white-space: nowrap; border-radius: 999px; border: 1px solid rgb(76 157 255 / .6); background: rgb(8 12 22 / .92);
+    color: #cfe2ff; font-size: 14px; box-shadow: 0 0 18px rgb(45 125 255 / .4); animation: aparece .5s .3s ease-out both; }
+  .pista-flecha { display: inline-block; color: var(--neon-claro); font-weight: 700; animation: flota 1.2s ease-in-out infinite; }
   .modo-3d .item-anexo { margin-top: 0; padding-left: 22px; }
   .modo-3d .item-anexo::before { left: 8px; top: 10px; height: 40%; }
   .modo-3d .pad, .modo-3d .pista { display: none; }
-  .modo-3d .panel { left: 10px; right: 10px; width: auto; top: auto; bottom: 74px; max-height: 54%; padding: 22px 20px; transform: none; animation: aparece .4s ease-out both; }
+  .modo-3d .panel { left: 10px; right: 10px; width: auto; top: auto; bottom: calc(92px + env(safe-area-inset-bottom)); max-height: 54%; padding: 22px 20px; transform: none; animation: aparece .4s ease-out both; }
   .panel-titulo { font-size: 26px; }
   .modo-3d .modal-mapa { padding: 10px; }
   .modal-caja { padding: 20px 16px 16px; }
   .mapa-3d { aspect-ratio: 1 / 1; }
-  html:not(.modo-3d) .portada { padding: 96px 16px 48px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

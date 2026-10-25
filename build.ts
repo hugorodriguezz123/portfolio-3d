@@ -10,6 +10,7 @@ import { translator, localePath, missing, defaultLocale } from "./src/lib/i18n";
 import { layout, type Page, type RenderCtx } from "./src/lib/layout";
 import { html, minifyHtml } from "./src/lib/html";
 import { prepareImages } from "./src/lib/images";
+import { spriteTecnologias } from "./src/sections/clasica";
 import { sitemap, robots, type PageMeta } from "./src/lib/seo";
 import { securityHeaders } from "./src/server/serve";
 
@@ -112,6 +113,7 @@ for (const locale of config.locales) {
 // ---------- SEO + hosting ----------
 await emit("sitemap.xml", sitemap(allMeta));
 await emit("robots.txt", robots());
+await emit("images/tecnologias.svg", spriteTecnologias());   // logos del río de tecnologías (vista clásica)
 await emit("manifest.webmanifest", JSON.stringify({
   name: config.name, short_name: config.name, start_url: "/", display: "standalone",
   background_color: config.themeColor.light, theme_color: config.themeColor.light,

@@ -15,7 +15,8 @@ export { crearMapaColombia } from './mapa-colombia.js';   // ventana del mapa 3D
 // Coordenadas de Blender (x, y, z) -> three.js (x, z, -y). Todas las medidas de abajo estan en metros de Blender.
 const V = (x, y, z = 0) => new THREE.Vector3(x, z, -y);
 const LIGHT_SCALE = 0.35 / 683;
-const TRAMO_FINAL = 4.5;      // si un personaje esta fuera de cuadro, "salta" hasta quedar a esta distancia del destino
+const TRAMO_FINAL = 4.5;      // si un personaje y su punto de llegada estan fuera de cuadro, "salta" hasta quedar a esta distancia del destino
+const PRISA = 2.2;            // fuera de cuadro camina mas rapido (cuando no puede saltar sin que se vea)
 const ASPECTO_REF = 16 / 9;   // los fov de abajo son verticales para pantallas 16:9
 
 // cam = posicion de la camara, mira = punto al que mira, spots = donde se paran los personajes,
@@ -185,6 +186,7 @@ class Personaje {
     this.ruta = null; this.espera = 0; this.cara = null; this.destino = null;
     this.avance = 1; this.frenar = false; this.bloqueado = 0;   // frenado suave cuando el otro personaje esta delante
     this.rodeo = false;   // sigue una ruta que ya rodea al otro: solo frena si el contacto es inminente
+    this.prisaOk = true;  // puede apurarse fuera de cuadro (solo si el otro esta lejos: si no, no alcanzaria a frenar)
     this._esfera = new THREE.Sphere(new THREE.Vector3(), 0.75);
   }
   colocar(x, y, cara) {
@@ -211,8 +213,8 @@ class Personaje {
     const a = this._punto(this.ruta.s), b = this._punto(this.ruta.s + 0.5), d = Math.hypot(b[0] - a[0], b[1] - a[1]);
     return d > 1e-3 ? [(b[0] - a[0]) / d, (b[1] - a[1]) / d] : [0, 0];
   }
-  visible(frustum) { this._esfera.center.set(this.x, 0.9, -this.y); return frustum.intersectsSphere(this._esfera); }
-  update(dt, frustum, libreEn = null) {
+  visible(frustum, x = this.x, y = this.y, margen = 0.75) { this._esfera.center.set(x, 0.9, -y); this._esfera.radius = margen; return frustum.intersectsSphere(this._esfera); }
+  update(dt, frustum, libreEn = null, camaraQuieta = true) {
     const r = this.ruta;
     let caminando = false;
     if (r) {
@@ -220,11 +222,19 @@ class Personaje {
       else {
         this.avance += ((this.frenar ? 0 : 1) - this.avance) * Math.min(1, dt * 8);
         caminando = this.avance > 0.15;
-        if (r.total - r.s > TRAMO_FINAL && !this.frenar && !this.visible(frustum) && (!libreEn || libreEn(this, ...this._punto(r.total - TRAMO_FINAL)))) r.s = r.total - TRAMO_FINAL;
-        r.s += this.velocidad * dt * Math.min(1, 0.35 + this.peso) * this.avance;
+        // Fuera de cuadro: salta solo si tambien el punto de llegada queda fuera (no aparece de golpe) y libre del otro;
+        // si no puede saltar, camina mas rapido hasta volver a verse
+        const fuera = !this.visible(frustum);
+        let salto = false;
+        if (fuera && camaraQuieta && !this.frenar && r.total - r.s > TRAMO_FINAL + 1.5) {
+          const [lx, ly] = this._punto(r.total - TRAMO_FINAL), [mx, my] = this._punto(r.total - TRAMO_FINAL + 1);
+          if (!this.visible(frustum, lx, ly, 1.3) && !this.visible(frustum, mx, my, 1.3) && (!libreEn || libreEn(this, lx, ly))) { r.s = r.total - TRAMO_FINAL; salto = true; this.saltos = (this.saltos || 0) + 1; }
+        }
+        r.s += this.velocidad * dt * Math.min(1, 0.35 + this.peso) * this.avance * (fuera && this.prisaOk ? PRISA : 1);
         [this.x, this.y] = this._punto(r.s);
         const ade = this._punto(r.s + 0.8);
         if (Math.hypot(ade[0] - this.x, ade[1] - this.y) > 0.05) this.yawObjetivo = yawHacia(ade[0] - this.x, ade[1] - this.y);
+        if (salto) this.yaw = this.yawObjetivo;   // nadie lo ve: llega ya orientado, sin girar en el sitio
         if (r.s >= r.total) { this.ruta = null; caminando = false; }
       }
     }
@@ -298,10 +308,15 @@ export function crear(op) {
   function moverPersonajes(nombre, inmediato) {
     const e = ESTADOS[nombre];
     if (!personajes.length) return;
-    const [p, q] = personajes, [s0, s1] = e.spots;
+    // personajes[0] = el de negro, personajes[1] = el de azul. Visto desde la camara de cada zona, el de azul va
+    // a la izquierda y el de negro a la derecha, salvo que asi se crucen: entonces cada uno toma el lugar mas cercano.
+    const [p, q] = personajes;
+    const [cx, cy] = e.cam, [mx, my] = e.mira, der = [my - cy, -(mx - cx)];   // vector "derecha" de la camara
+    const lado = (sp) => sp[0] * der[0] + sp[1] * der[1];
+    const [izq, dch] = lado(e.spots[0]) <= lado(e.spots[1]) ? e.spots : [e.spots[1], e.spots[0]];
     const d = (a, s) => Math.hypot(a.x - s[0], a.y - s[1]);
-    const cruzado = d(p, s1) + d(q, s0) < d(p, s0) + d(q, s1);
-    const asign = cruzado ? [[p, s1], [q, s0]] : [[p, s0], [q, s1]];
+    const preferido = d(p, dch) + d(q, izq), otro = d(p, izq) + d(q, dch);
+    const asign = inmediato || preferido <= otro + 0.8 ? [[p, dch], [q, izq]] : [[p, izq], [q, dch]];
     asign.forEach(([per, spot], k) => {
       if (inmediato) per.colocar(spot[0], spot[1], e.cara);
       else { per.irA(mapa.ruta([per.x, per.y], spot), e.cara, k * 0.4); per.rodeo = false; }
@@ -314,7 +329,8 @@ export function crear(op) {
   const delanteDe = (p, o) => {
     if (!p.ruta || p.espera > 0) return false;
     const dx = o.x - p.x, dy = o.y - p.y, d = Math.hypot(dx, dy) || 1e-3, [rx, ry] = p.rumbo();
-    return d < (p.rodeo ? 0.6 : DIST_CHOQUE) && (dx * rx + dy * ry) / d > 0.2;
+    // Lejos cuenta solo lo que esta delante; muy cerca (< 0,7 m) tambien lo que esta de lado, para no rozarse los hombros
+    return d < (p.rodeo ? 0.7 : DIST_CHOQUE) && (dx * rx + dy * ry) / d > (d < 0.7 ? -0.15 : 0.2);
   };
   function evitarChoques(dt) {
     if (personajes.length < 2) return;
@@ -322,6 +338,7 @@ export function crear(op) {
     const ve = [delanteDe(a, b), delanteDe(b, a)];
     personajes.forEach((p, k) => {
       const o = personajes[1 - k];
+      p.prisaOk = Math.hypot(o.x - p.x, o.y - p.y) > 2.5;
       const otroQuieto = !o.ruta || o.espera > 0;
       // Cede si tiene al otro delante, salvo el primero cuando van de frente y el otro sigue caminando
       const cede = ve[k] && !(k === 0 && ve[1] && !otroQuieto);
@@ -329,7 +346,7 @@ export function crear(op) {
       if (!cede) { p.bloqueado = Math.min(p.bloqueado, 0); return; }
       p.bloqueado += dt;
       if (p.bloqueado > 0.3 && p.destino) {
-        p.irA(mapa.ruta([p.x, p.y], p.destino, { x: o.x, y: o.y, r: 0.65 }), p.cara, 0);
+        p.irA(mapa.ruta([p.x, p.y], p.destino, { x: o.x, y: o.y, r: 0.8 }), p.cara, 0);
         p.rodeo = true;
         p.bloqueado = -0.7;   // espera un poco antes de volver a recalcular
       }
@@ -426,14 +443,20 @@ export function crear(op) {
   const loader = new GLTFLoader().setDRACOLoader(draco);
   const pesos = op.pesos || [4.2, 0.71, 0.74], prog = [0, 0, 0];   // MB de cada archivo (solo para la barra)
   const progreso = () => avisar('alProgreso', Math.min(0.99, prog.reduce((s, p, k) => s + p * pesos[k], 0) / pesos.reduce((a, b) => a + b, 0)));
-  const cargar = (url, k) => new Promise((res, rej) => loader.load(url,
-    (g) => { prog[k] = 1; progreso(); res(g); },
-    (e) => { prog[k] = Math.min(0.98, e.loaded / (e.total || pesos[k] * 1e6)); progreso(); },
-    rej));
+  // Si main.ts ya trae las descargas (op.archivos), solo se decodifican; el decodificador Draco se prepara
+  // de inmediato para no esperar al primer modelo
+  draco.preload();
+  let decodificados = 0;
+  const cargar = (url, k) => op.archivos
+    ? op.archivos[k].then((buf) => loader.parseAsync(buf, '')).then((g) => { avisar('alProgreso', (++decodificados / 3) * 0.6); return g; })
+    : new Promise((res, rej) => loader.load(url,
+      (g) => { prog[k] = 1; progreso(); res(g); },
+      (e) => { prog[k] = Math.min(0.98, e.loaded / (e.total || pesos[k] * 1e6)); progreso(); },
+      rej));
   let vivo = true;
   const pantallas = {};   // pantallas que muestran videos o imagenes: material, malla y textura original
   const PANTALLAS = { M_Screen_Main: 'central', M_Whiteboard: 'izquierda' };
-  Promise.all([cargar(op.modelos.oficina, 0), cargar(op.modelos.personajes[0], 1), cargar(op.modelos.personajes[1], 2)]).then(([of, p1, p2]) => {
+  Promise.all([cargar(op.modelos.oficina, 0), cargar(op.modelos.personajes[0], 1), cargar(op.modelos.personajes[1], 2)]).then(async ([of, p1, p2]) => {
     if (!vivo) return;
     scene.add(of.scene);
     of.scene.traverse((o) => {
@@ -448,21 +471,39 @@ export function crear(op) {
     const cfgs = [{ zancada: 1.751, ritmo: 1.0 }, { zancada: 1.7709, ritmo: 1.0 }];
     [p1, p2].forEach((g, k) => { const p = new Personaje(g, cfgs[k]); personajes.push(p); scene.add(p.raiz); });
     moverPersonajes(actual, true);
-    renderer.compile(scene, camera);
+    avisar('alProgreso', 0.7);
+    // Compila los ~100 materiales en paralelo (KHR_parallel_shader_compile) sin bloquear la pagina
+    await renderer.compileAsync(scene, camera);
+    if (!vivo) return;
+    avisar('alProgreso', 0.85);
     // Sube todas las texturas a la GPU ahora: si no, se suben la primera vez que entran en cuadro y la camara se traba
     const subidas = new Set();
     scene.traverse((o) => { for (const m of [].concat(o.material || [])) for (const v of Object.values(m)) if (v && v.isTexture && !subidas.has(v)) { subidas.add(v); renderer.initTexture(v); } });
+    // Calentamiento (detras de la pantalla de carga): un cuadro con toda la oficina, sin descartar lo que esta fuera
+    // de camara, sube a la GPU todas las geometrias. Si no, el primer viaje a la vista general las sube de golpe.
+    // Se dibuja en un lienzo diminuto y sin posproceso: subir geometria no depende de la resolucion.
+    const descartables = [];
+    scene.traverse((o) => { if (o.isMesh && o.frustumCulled) { o.frustumCulled = false; descartables.push(o); } });
+    const mini = new THREE.WebGLRenderTarget(16, 16);
+    renderer.setRenderTarget(mini); renderer.render(scene, camera); renderer.setRenderTarget(null);
+    mini.dispose();
+    for (const o of descartables) o.frustumCulled = true;
+    avisar('alProgreso', 1);
+    // La resolucion adaptativa empieza a medir ahora: los cuadros pesados de la carga no cuentan
+    msMedio = 16; ultimoCuadro = 0; ultimoAjuste = performance.now();
+    preparada = true;
     avisar('alListo');
   }).catch((e) => { console.error(e); avisar('alError', String(e && e.message || e)); });
 
   // ---------- bucle ----------
   const reloj = new THREE.Clock();
   const derecha = new THREE.Vector3(), arriba = new THREE.Vector3(0, 1, 0), dir = new THREE.Vector3(), _mira = new THREE.Vector3();
-  let raf = 0, pausado = false, msMedio = 16, ultimoAjuste = 0, ultimoCuadro = 0;
+  let raf = 0, preparada = false, pausado = false, msMedio = 16, ultimoAjuste = 0, ultimoCuadro = 0, finRecorrido = 0;
   function ajustarResolucion(ahora) {
     if (ultimoCuadro) msMedio += (Math.min(100, ahora - ultimoCuadro) - msMedio) * 0.05;
     ultimoCuadro = ahora;
-    if (trans || ahora - ultimoAjuste < 3000) return;   // nunca durante un recorrido: cambiar el tamano cuesta un cuadro
+    if (trans) { finRecorrido = ahora; return; }   // nunca durante un recorrido: cambiar el tamano cuesta un cuadro
+    if (ahora - ultimoAjuste < 3000 || ahora - finRecorrido < 2000) return;   // ni justo al llegar
     let nuevo = pr;
     if (msMedio > 26 && pr > PR_MIN) nuevo = Math.max(PR_MIN, pr - 0.25);
     else if (msMedio < 18.5 && pr < PR_MAX && ahora - ultimoAjuste > 8000) nuevo = Math.min(PR_MAX, pr + 0.125);
@@ -472,7 +513,9 @@ export function crear(op) {
   }
   function cuadro() {
     raf = requestAnimationFrame(cuadro);
-    if (pausado) { reloj.getDelta(); ultimoCuadro = 0; return; }   // la ventana del mapa tapa la escena: no se dibuja
+    // Sin dibujar mientras carga (el lienzo esta oculto: asi la GPU se dedica a preparar la escena)
+    // ni con la ventana del mapa abierta (la tapa)
+    if (pausado || !preparada) { reloj.getDelta(); ultimoCuadro = 0; return; }
     medir();
     paso(Math.min(reloj.getDelta(), 0.1));
     const ahora = performance.now();
@@ -506,7 +549,7 @@ export function crear(op) {
     camera.updateMatrixWorld();
     frustum.setFromProjectionMatrix(_m.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
     evitarChoques(dt);
-    for (const p of personajes) p.update(dt, frustum, lugarLibre);
+    for (const p of personajes) p.update(dt, frustum, lugarLibre, !trans);   // con la camara en viaje no hay saltos: lo que hoy esta fuera de cuadro puede verse un instante despues
   }
   raf = requestAnimationFrame(cuadro);
 
@@ -565,6 +608,6 @@ export function crear(op) {
   // simular: avanza el tiempo sin dibujar (util para pruebas automaticas y capturas)
   const simular = (seg) => { for (let t = 0; t < seg; t += 0.05) paso(0.05); };
   const pausar = (v) => { pausado = !!v; };
-  const posiciones = () => personajes.map((p) => [p.x, p.y]);   // para pruebas automaticas
+  const posiciones = () => personajes.map((p) => [p.x, p.y, p.visible(frustum) ? 1 : 0, p.saltos || 0]);   // para pruebas automaticas
   return { ir, destruir, mostrarEnPantalla, pausar, posiciones, estado: () => actual, llegado: () => llegado, simular };
 }

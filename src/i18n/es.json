@@ -58,11 +58,12 @@
       "Diseño 3D",
       "Diseño mecánico"
     ],
-    "bajar": "Desliza para entrar a la oficina",
     "fotoAlt": "Los fundadores de JHS Software Solutions",
     "cargando": "Cargando la oficina 3D",
     "error": "Tu navegador no pudo mostrar la oficina 3D.",
-    "sin3d": "Ver el contenido sin 3D"
+    "sin3d": "Ver el contenido sin 3D",
+    "iniciar": "Presiona Enter para iniciar",
+    "iniciarTactil": "Toca para iniciar"
   },
   "menu": {
     "items": [
@@ -131,7 +132,8 @@
       "el mapa"
     ],
     "despues": "o usa",
-    "teclas": "← ↑ → ↓ · Ctrl · Espacio · X"
+    "teclas": "← ↑ → ↓ · Ctrl · Espacio · X",
+    "movil": "Elige una sección en el menú de abajo"
   },
   "hud": {
     "abrir": "abrir",
@@ -305,7 +307,7 @@
         "nombre": "Oficina virtual 3D",
         "area": "Desarrollo web · Diseño 3D",
         "cliente": "JHS Software Solutions, proyecto propio",
-        "anio": "[AÑO]",
+        "anio": "2026",
         "texto": "Este mismo sitio: una oficina 3D que se recorre desde el navegador, con cámara guiada, personajes animados que caminan esquivando los muebles y secciones que se abren al hacer clic sobre los objetos.",
         "lista": [
           "Modelado, texturas e iluminación de toda la oficina",
@@ -319,7 +321,8 @@
           "Animación",
           "Optimización"
         ],
-        "servicio": "web"
+        "servicio": "web",
+        "portada": "/images/proyectos/oficina-3d.webp"
       },
       {
         "nombre": "SARA IoT",
@@ -627,7 +630,7 @@
       },
       {
         "dato": "Desde",
-        "valor": "[AÑO DE FUNDACIÓN]"
+        "valor": "2026"
       }
     ],
     "experiencia": "Experiencia",
@@ -800,23 +803,137 @@
   "privacy": {
     "meta": {
       "title": "Política de privacidad",
-      "description": "Cómo trata JHS Software Solutions los datos personales que nos compartes a través del formulario de contacto de este sitio web."
+      "description": "Cómo trata JHS Software Solutions los datos personales que nos compartes en este sitio web, conforme a la Ley 1581 de 2012 de Colombia."
     },
-    "title": "Política de privacidad",
-    "volver": "Volver a la oficina",
-    "paragraphs": [
-      "Los datos que envías en el formulario de contacto (nombre, correo y mensaje) se usan únicamente para responder tu solicitud y no se comparten con terceros.",
-      "Puedes consultar, actualizar o pedir que eliminemos tus datos escribiendo a forgesolutions123@gmail.com.",
-      "[Completa este texto con la política de tratamiento de datos de tu empresa. En Colombia aplica la Ley 1581 de 2012.]"
-    ]
+    "title": "Política de tratamiento de datos personales",
+    "vigencia": "Vigente desde el 24 de octubre de 2026",
+    "intro": "En JHS Software Solutions respetamos tu privacidad. Esta política explica qué datos personales recogemos en este sitio web, para qué los usamos y cómo puedes ejercer tus derechos, de acuerdo con la Ley 1581 de 2012 y el Decreto 1377 de 2013 de Colombia.",
+    "secciones": [
+      {
+        "titulo": "1. Responsable del tratamiento",
+        "parrafos": [
+          "JHS Software Solutions, con domicilio en Bucaramanga, Santander, Colombia.",
+          "Correo: forgesolutions123@gmail.com · Teléfono y WhatsApp: +57 316 097 8783."
+        ]
+      },
+      {
+        "titulo": "2. Qué datos recogemos",
+        "lista": [
+          "Los que escribes en el formulario de contacto: nombre, correo electrónico, el servicio que te interesa y tu mensaje.",
+          "Los que nos compartes si nos escribes por correo, teléfono o WhatsApp.",
+          "Datos técnicos básicos que registra el servidor de alojamiento al visitar el sitio (dirección IP, navegador y páginas visitadas), necesarios para que la web funcione y sea segura."
+        ],
+        "nota": "No pedimos datos sensibles ni datos de pago, y no usamos cookies de publicidad ni herramientas de seguimiento de terceros."
+      },
+      {
+        "titulo": "3. Para qué los usamos",
+        "lista": [
+          "Responder tu mensaje y preparar la propuesta o cotización que solicitas.",
+          "Mantener la comunicación sobre el proyecto que nos encargues.",
+          "Proteger el sitio frente a abusos y envíos automáticos (spam)."
+        ],
+        "nota": "No vendemos ni alquilamos tus datos, y no los usamos para enviarte publicidad sin tu autorización."
+      },
+      {
+        "titulo": "4. Con quién los compartimos",
+        "parrafos": [
+          "Solo con los proveedores que necesitamos para operar el sitio, que actúan como encargados del tratamiento:"
+        ],
+        "lista": [
+          "Web3Forms, que recibe el formulario de contacto y nos lo reenvía por correo.",
+          "Vercel, que aloja el sitio web.",
+          "Google (Gmail), donde recibimos y respondemos los correos."
+        ],
+        "nota": "Estos proveedores pueden almacenar la información fuera de Colombia, con medidas de seguridad adecuadas. También entregaremos datos a una autoridad cuando la ley lo exija."
+      },
+      {
+        "titulo": "5. Almacenamiento en tu navegador",
+        "parrafos": [
+          "El sitio guarda en tu propio navegador (almacenamiento local) solo dos preferencias: el idioma y si prefieres ver la oficina en 3D o la vista clásica. No contienen datos personales y puedes borrarlas cuando quieras desde la configuración del navegador."
+        ]
+      },
+      {
+        "titulo": "6. Tus derechos",
+        "parrafos": [
+          "Como titular de los datos puedes, en cualquier momento:"
+        ],
+        "lista": [
+          "Conocer, actualizar y rectificar tus datos.",
+          "Pedir prueba de la autorización que nos diste.",
+          "Saber qué uso les hemos dado.",
+          "Revocar la autorización o pedir que los eliminemos, cuando no exista un deber legal o contractual de conservarlos.",
+          "Presentar quejas ante la Superintendencia de Industria y Comercio (SIC) si consideras que se vulneraron tus derechos."
+        ]
+      },
+      {
+        "titulo": "7. Cómo ejercerlos",
+        "parrafos": [
+          "Escríbenos a forgesolutions123@gmail.com indicando tu nombre, tu solicitud y un medio de respuesta. Atendemos las consultas en un máximo de diez (10) días hábiles y los reclamos en un máximo de quince (15) días hábiles, según la ley."
+        ]
+      },
+      {
+        "titulo": "8. Conservación y seguridad",
+        "parrafos": [
+          "Conservamos tus datos solo el tiempo necesario para atender tu solicitud y la relación comercial que surja de ella, y durante los plazos que exija la ley. Usamos medidas técnicas y organizativas razonables para protegerlos contra pérdida, acceso o uso no autorizado; el sitio se sirve siempre por una conexión cifrada (HTTPS)."
+        ]
+      },
+      {
+        "titulo": "9. Menores de edad",
+        "parrafos": [
+          "Este sitio está dirigido a empresas y personas adultas. No recogemos de forma intencional datos de menores de 18 años."
+        ]
+      },
+      {
+        "titulo": "10. Autorización y cambios",
+        "parrafos": [
+          "Al enviar el formulario o escribirnos, nos autorizas a tratar tus datos según esta política. Si la cambiamos, publicaremos la nueva versión en esta página con su fecha de vigencia."
+        ]
+      }
+    ],
+    "volver": "Volver al inicio"
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
-    "privacidad": "Privacidad"
+    "privacidad": "Política de privacidad",
+    "descripcion": "Estudio de tecnología e ingeniería en Bucaramanga, Colombia. Software, inteligencia artificial, dispositivos conectados y diseño, con el mismo equipo de principio a fin.",
+    "navegacion": "Navegación",
+    "servicios": "Servicios",
+    "contacto": "Contacto",
+    "whatsapp": "WhatsApp",
+    "hecho": "Hecho en Bucaramanga, Colombia",
+    "arriba": "Volver arriba"
   },
   "notFound": {
     "title": "Página no encontrada",
     "text": "La página que buscas no existe o fue movida.",
     "back": "Volver a la oficina"
+  },
+  "clasica": {
+    "nav": {
+      "nosotros": "Nosotros",
+      "servicios": "Servicios",
+      "portafolio": "Portafolio",
+      "tecnologias": "Tecnologías",
+      "contacto": "Contacto"
+    },
+    "ver3d": "Ver en 3D",
+    "sin3d": "Ver sin 3D",
+    "verServicios": "Ver servicios",
+    "nosotros": {
+      "titulo": "Un mismo equipo, de la idea al producto",
+      "experiencia": "Ver experiencia"
+    },
+    "servicios": {
+      "titulo": "Lo que construimos para ti",
+      "lead": "Software, inteligencia artificial, dispositivos conectados y diseño, a la medida de tu negocio. El código y el proyecto completo son tuyos."
+    },
+    "portafolio": {
+      "titulo": "Proyectos que ya están funcionando",
+      "lead": "Aplicaciones, plataformas y sitios que diseñamos y desarrollamos de principio a fin."
+    },
+    "contacto": {
+      "lead": "Cuéntanos tu idea y te respondemos con una propuesta. También puedes escribirnos directamente.",
+      "whatsapp": "Escríbenos por WhatsApp"
+    }
   }
 }

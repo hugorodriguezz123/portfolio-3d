@@ -1,5 +1,5 @@
 import config from "../../site.config";
-import { html, attrs } from "../lib/html";
+import { html, attrs, raw } from "../lib/html";
 import { img } from "../lib/images";
 import { localePath } from "../lib/i18n";
 import { marca, marcaBarra } from "../lib/marca";
@@ -41,7 +41,7 @@ function portada({ t }: RenderCtx) {
     <div class="velo" aria-hidden="true"></div>
     <div class="hero">
       <p class="ceja mono">${t("portada.ceja")}</p>
-      <h1 id="titulo-portada" class="h1 display">${marca()}</h1>
+      <p id="titulo-portada" class="h1 display">${marca()}</p>
       <p class="lead">${t("portada.lead")}</p>
       <div class="acciones">
         <a class="btn btn-1" href="#servicios" data-ir="oficina" data-entrar>${t("portada.entrar")}</a>
@@ -58,9 +58,9 @@ function portada({ t }: RenderCtx) {
       <p class="carga-txt mono" role="status" aria-live="polite" data-carga-txt>${t("portada.cargando")}</p>
       <p class="carga-error" data-carga-error hidden>${t("portada.error")} <button class="btn btn-2" type="button" data-sin-3d>${t("portada.sin3d")}</button></p>
     </div>
-    <button class="bajar mono" type="button" data-ir="oficina" data-solo-3d>
-      <svg width="18" height="26" viewBox="0 0 18 26" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="1" y="1" width="16" height="24" rx="8"/><line x1="9" y1="6" x2="9" y2="11" stroke-linecap="round"/></svg>
-      ${t("portada.bajar")}
+    <button class="iniciar mono" type="button" data-ir="oficina" data-solo-3d>
+      <span class="tecla-enter" aria-hidden="true">Enter ↵</span>
+      <span class="iniciar-teclado">${t("portada.iniciar")}</span><span class="iniciar-tactil">${t("portada.iniciarTactil")}</span>
     </button>
   </section>`;
 }
@@ -69,9 +69,27 @@ function portada({ t }: RenderCtx) {
 function barra({ t, locale }: RenderCtx) {
   return html`<header class="barra">
     <a class="marca" href="#main" data-ir="portada" aria-label="${t("a11y.inicio")}">${marcaBarra()}</a>
-    <div class="barra-der">${selectorIdioma(locale, t)}<a class="btn btn-2" href="#contacto" data-ir="contacto">${t("top.contacto")}</a></div>
+    <div class="barra-der"><button class="btn btn-2 btn-modo" type="button" data-cambiar-modo="clasico">${t("clasica.sin3d")}</button>${selectorIdioma(locale, t)}<a class="btn btn-2" href="#contacto" data-ir="contacto">${t("top.contacto")}</a></div>
   </header>`;
 }
+
+/** Íconos del menú (trazos de 24×24): en el celular la barra de navegación los muestra sobre cada nombre. */
+const ICONOS: Record<string, string> = {
+  servicios: '<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/>',
+  proyectos: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  tecnologias: '<rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
+  nosotros: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  taller: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/>',
+  contacto: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  mapa: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
+  oficina: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+  portada: '<path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>',
+  todas: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>',
+};
+const icono = (id: string) => raw(`<span class="item-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${ICONOS[id] ?? ""}</svg></span>`);
+
+/** Sección de la vista clásica a la que apunta cada enlace del menú (sin JS o al compartir el enlace). */
+const ANCLA: Record<string, string> = { proyectos: "portafolio", taller: "servicios" };
 
 /* ---------- Letreros de neón (menús) ---------- */
 function menus({ t }: RenderCtx) {
@@ -81,18 +99,18 @@ function menus({ t }: RenderCtx) {
   const perfiles = [{ id: "estudio", nombre: t("nosotros.estudio") }, ...t.list<Persona>("nosotros.equipo").map((p) => ({ id: p.id, nombre: p.corto }))];
   const tecla = (texto: string, aria = "") => html`<span class="tecla mono"${attrs({ "aria-label": aria || undefined })}>${texto}</span>`;
   const volver = html`<span class="neon-linea corta" aria-hidden="true"></span>
-      <a class="item" href="#main" data-ir="oficina"><span>${t("menu.todas")}</span>${tecla("Esc")}</a>`;
+      <a class="item item-icono item-volver" href="#main" data-ir="oficina">${icono("todas")}<span>${t("menu.todas")}</span>${tecla("Esc")}</a>`;
   return html`
   <div class="menu" data-vista="menu-principal">
     <nav class="letrero" aria-label="${t("a11y.mainNav")}">
       <p class="letrero-tit">${marca("lockup-letrero")}</p>
       <span class="neon-linea" aria-hidden="true"></span>
       ${items.map((i) => i.id === "mapa"
-        ? html`<a class="item" href="#contacto" data-abrir-mapa data-item="mapa" data-solo-3d><span>${i.label}</span>${tecla(i.tecla, t(i.teclaAria))}</a>`
-        : html`<a class="item" href="#${i.id}" data-ir="${i.id}" data-item="${i.id}"><span>${i.label}</span>${tecla(i.tecla, i.teclaAria ? t(i.teclaAria) : "")}</a>`)}
+        ? html`<a class="item item-icono" href="#contacto" data-abrir-mapa data-item="mapa" data-solo-3d>${icono("mapa")}<span>${i.label}</span>${tecla(i.tecla, t(i.teclaAria))}</a>`
+        : html`<a class="item item-icono" href="#${ANCLA[i.id] ?? i.id}" data-ir="${i.id}" data-item="${i.id}">${icono(i.id)}<span>${i.label}</span>${tecla(i.tecla, i.teclaAria ? t(i.teclaAria) : "")}</a>`)}
       <span class="neon-linea corta" aria-hidden="true"></span>
-      <a class="item" href="#main" data-ir="oficina" data-item="oficina" data-solo-3d><span>${t("menu.vista")}</span>${tecla("Esc")}</a>
-      <a class="item" href="#main" data-ir="portada" data-solo-3d><span>${t("menu.inicio")}</span>${tecla("↖")}</a>
+      <a class="item item-icono" href="#main" data-ir="oficina" data-item="oficina" data-solo-3d>${icono("oficina")}<span>${t("menu.vista")}</span>${tecla("Esc")}</a>
+      <a class="item item-icono" href="#main" data-ir="portada" data-solo-3d>${icono("portada")}<span>${t("menu.inicio")}</span>${tecla("↖")}</a>
     </nav>
   </div>
   <div class="menu" data-vista="menu-servicios" data-solo-3d>
@@ -136,6 +154,7 @@ function controles({ t }: RenderCtx) {
     <button type="button" style="grid-column:3;grid-row:2" data-pad="der" aria-label="${t("a11y.padDer")}"
       data-aria-normal="${t("a11y.padDer")}" data-aria-proyectos="${t("a11y.padDerProyectos")}" data-aria-servicios="${t("a11y.padDerServicios")}" data-aria-nosotros="${t("a11y.padDerNosotros")}">→</button>
   </div>
+  <p class="pista-movil" data-vista="pista" data-solo-3d><span class="pista-flecha" aria-hidden="true">↓</span>${t("pista.movil")}</p>
   <p class="pista" data-vista="pista" data-solo-3d>${t("pista.antes")} ${objetos.map((o, k) =>
     html`<b>${o}</b>${k < objetos.length - 2 ? ", " : k === objetos.length - 2 ? " o " : ""}`)}, ${t("pista.despues")} <span class="mono">${t("pista.teclas")}</span></p>
   <div class="hud" data-hud aria-hidden="true" data-solo-3d><i class="e1"></i><i class="e2"></i><i class="e3"></i><i class="e4"></i><span class="hud-tag mono" data-hud-tag data-abrir="${t("hud.abrir")}"></span></div>`;
@@ -144,7 +163,7 @@ function controles({ t }: RenderCtx) {
 /* ---------- Paneles ---------- */
 function panelServicios({ t }: RenderCtx) {
   const items = t.list<Item>("servicios.items");
-  return html`<section class="panel" id="servicios" data-vista="servicios" data-scroll aria-labelledby="servicios-titulo">
+  return html`<section class="panel" id="panel-servicios" data-vista="servicios" data-scroll aria-labelledby="servicios-titulo">
     <h2 id="servicios-titulo" class="titulo-seccion">${t("servicios.titulo")}</h2>
     ${items.map((s, k) => html`<article class="cuerpo" id="servicio-${s.id}" data-vista="servicio-${s.id}"${attrs({ "data-pantalla": s.video })} aria-labelledby="sv-${s.id}">
       ${cabecera(`${t("servicios.cab")} ${dos(k + 1)} / ${dos(items.length)}`, t("servicios.lugar"))}
@@ -165,7 +184,7 @@ function panelServicios({ t }: RenderCtx) {
 
 function panelProyectos({ t }: RenderCtx) {
   const items = t.list<Proyecto>("proyectos.items");
-  return html`<section class="panel" id="proyectos" data-vista="proyectos" data-scroll aria-labelledby="proyectos-titulo">
+  return html`<section class="panel" id="panel-proyectos" data-vista="proyectos" data-scroll aria-labelledby="proyectos-titulo">
     <h2 id="proyectos-titulo" class="titulo-seccion">${t("proyectos.titulo")}</h2>
     ${items.map((p, k) => html`<article class="cuerpo" id="proyecto-${k + 1}" data-vista="proyecto-${k}"${attrs({ "data-pantalla": p.video || p.imagen || undefined })} aria-labelledby="pr-${k}">
       ${cabecera(`${t("proyectos.cab")} ${dos(k + 1)} / ${dos(items.length)}`, t("proyectos.lugar"))}
@@ -192,7 +211,7 @@ function panelProyectos({ t }: RenderCtx) {
 
 function panelTecnologias({ t }: RenderCtx) {
   const grupos = t.list<{ titulo: string; texto?: string; chips: string[] }>("tecnologias.grupos");
-  return html`<section class="panel" id="tecnologias" data-vista="tecnologias" data-scroll aria-labelledby="tecnologias-titulo">
+  return html`<section class="panel" id="panel-tecnologias" data-vista="tecnologias" data-scroll aria-labelledby="tecnologias-titulo">
     <div class="cuerpo">
       ${cabecera(t("tecnologias.cab"), t("tecnologias.lugar"))}
       <h2 id="tecnologias-titulo" class="panel-titulo">${t("tecnologias.titulo")}</h2>
@@ -216,7 +235,7 @@ function panelNosotros({ t }: RenderCtx) {
         <a class="btn btn-2" href="#servicios" data-ir="servicios">${t("nosotros.verServicios")}</a>
         <a class="btn btn-1" href="#contacto" data-ir="contacto">${t("nosotros.hablemos")}</a>
       </div>`;
-  return html`<section class="panel" id="nosotros" data-vista="nosotros" data-scroll aria-labelledby="nosotros-titulo">
+  return html`<section class="panel" id="panel-nosotros" data-vista="nosotros" data-scroll aria-labelledby="nosotros-titulo">
     <h2 id="nosotros-titulo" class="titulo-seccion">${t("nosotros.menu.titulo")}</h2>
     <article class="cuerpo" id="nosotros-estudio" data-vista="nosotros-estudio" aria-labelledby="ns-estudio">
       ${cabecera(`${t("nosotros.cab")} 01 / ${total}`, t("nosotros.lugar"))}
@@ -246,14 +265,14 @@ function panelNosotros({ t }: RenderCtx) {
 
 function panelTaller({ t }: RenderCtx) {
   const grupos = t.list<{ titulo: string; lista: string[] }>("taller.grupos");
-  return html`<section class="panel" id="taller" data-vista="taller" data-scroll aria-labelledby="taller-titulo">
+  return html`<section class="panel" id="panel-taller" data-vista="taller" data-scroll aria-labelledby="taller-titulo">
     <div class="cuerpo">
       ${cabecera(t("taller.cab"), t("taller.lugar"))}
       <h2 id="taller-titulo" class="panel-titulo">${t("taller.titulo")}</h2>
       <p>${t("taller.texto")}</p>
       ${grupos.map((g) => html`<div class="grupo"><h3 class="h3">${g.titulo}</h3>${lista(g.lista)}</div>`)}
       <div class="panel-pie">
-        <a class="btn btn-2" href="#proyectos" data-ir="proyectos">${t("taller.verProyectos")}</a>
+        <a class="btn btn-2" href="#portafolio" data-ir="proyectos">${t("taller.verProyectos")}</a>
         <a class="btn btn-1" href="#contacto" data-ir="contacto">${t("taller.hablemos")}</a>
       </div>
     </div>
@@ -261,16 +280,13 @@ function panelTaller({ t }: RenderCtx) {
 }
 
 /** Formulario progresivo: sin JS hace POST normal; con JS envía por fetch y muestra el estado. */
-function panelContacto({ t, locale }: RenderCtx) {
+/** Formulario progresivo: sin JS hace POST normal; con JS envía por fetch y muestra el estado. */
+export function formulario({ t, locale }: RenderCtx) {
   const c = config.contact;
   const honeypot: Record<string, string> = { formspree: "_gotcha", web3forms: "botcheck" };
   const servicios = t.list<{ id: string; label: string }>("contact.servicios");
-  const directo = t.list<{ dato: string; valor: string; href?: string }>("contact.directo");
-  return html`<section class="panel" id="contacto" data-vista="contacto" data-scroll aria-labelledby="contacto-titulo">
-    <div class="cuerpo">
-      ${cabecera(t("contact.cab"), t("contact.lugar"))}
-      <h2 id="contacto-titulo" class="panel-titulo">${t("contact.title")}</h2>
-      ${c.provider === "none" ? "" : html`
+  if (c.provider === "none") return "";
+  return html`
       <form class="form" method="post" action="${c.endpoint}" data-contact-form data-provider="${c.provider}" novalidate>
         ${c.provider === "web3forms" ? html`<input type="hidden" name="access_key" value="${c.accessKey ?? ""}"><input type="hidden" name="subject" value="${t("contact.asunto", { nombre: config.name })}">` : ""}
         <input type="hidden" name="_ts" value="">
@@ -288,7 +304,17 @@ function panelContacto({ t, locale }: RenderCtx) {
              data-invalid="${t("contact.invalid")}"></p>
         </div>
         <p class="legal ancho">${t("contact.privacidad")} <a href="${localePath(locale, "privacidad")}">${t("contact.privacidadLink")}</a>.</p>
-      </form>`}
+      </form>`;
+}
+
+function panelContacto(ctx: RenderCtx) {
+  const { t } = ctx;
+  const directo = t.list<{ dato: string; valor: string; href?: string }>("contact.directo");
+  return html`<section class="panel" id="panel-contacto" data-vista="contacto" data-scroll aria-labelledby="contacto-titulo">
+    <div class="cuerpo">
+      ${cabecera(t("contact.cab"), t("contact.lugar"))}
+      <h2 id="contacto-titulo" class="panel-titulo">${t("contact.title")}</h2>
+      ${formulario(ctx)}
       <ul class="directo">${directo.map((d) => html`<li>${d.dato} ${d.href ? html`<a href="${d.href}"><b>${d.valor}</b></a>` : html`<b>${d.valor}</b>`}</li>`)}</ul>
     </div>
   </section>`;

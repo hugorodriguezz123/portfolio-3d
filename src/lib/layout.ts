@@ -35,11 +35,12 @@ interface LayoutArgs {
 }
 
 /**
- * Script bloqueante MÍNIMO en <head>: fija el tema y marca la página con .js y .modo-3d antes del primer
- * pintado (así el modo 3D no "parpadea" desde el modo documento). main.ts quita .modo-3d si no hay WebGL.
+ * Script bloqueante MÍNIMO en <head>: fija el tema y marca la página con .js y, si toca, .modo-3d antes del primer
+ * pintado. Modo: ?modo=3d|clasico o la elección guardada; si no hay, clásico en celulares y tabletas y 3D en
+ * computadores. Sin .modo-3d se ve la vista clásica (también sin JavaScript). main.ts quita .modo-3d si no hay WebGL.
  */
 const themeBoot = (def: string, sw: boolean, inmersiva = false) =>
-  raw(`<script>(function(){var d=document.documentElement,t="${def}";try{${sw ? 't=localStorage.getItem("theme")||t;' : ""}}catch(e){}if(t==="system")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";d.dataset.theme=t;d.classList.add("js"${inmersiva ? ',"modo-3d"' : ""})})()</script>`);
+  raw(`<script>(function(){var d=document.documentElement,t="${def}";try{${sw ? 't=localStorage.getItem("theme")||t;' : ""}}catch(e){}if(t==="system")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";d.dataset.theme=t;d.classList.add("js")${inmersiva ? ';var q=new URLSearchParams(location.search).get("modo"),m=q;try{if(q==="3d"||q==="clasico"){localStorage.setItem("modo",q);history.replaceState(null,"",location.pathname+location.hash)}m=localStorage.getItem("modo")||q}catch(e){}if(m!=="3d"&&m!=="clasico")m=matchMedia("(max-width: 760px), (hover: none) and (pointer: coarse)").matches?"clasico":"3d";if(m==="3d")d.classList.add("modo-3d")' : ""}})()</script>`);
 
 /**
  * Idioma automático (va primero en el <head>, antes de pintar): usa el primer idioma del navegador que sea español
@@ -51,6 +52,43 @@ const idiomaBoot = () =>
 
 /** Fuentes autoalojadas que conviene precargar (texto visible en la portada). */
 const FUENTES_PRECARGA = ["/fonts/manrope-latin-400-normal.woff2", "/fonts/unbounded-latin-700-normal.woff2"];
+
+/** Pie de página: marca, navegación, servicios, contacto y barra legal. Se oculta dentro de la oficina 3D. */
+function piePagina({ t, locale }: RenderCtx) {
+  const inicio = localePath(locale);
+  const secciones = ["nosotros", "servicios", "portafolio", "tecnologias", "contacto"];
+  const servicios = t.list<{ id: string; nombre: string }>("servicios.items");
+  const directo = t.list<{ dato: string; valor: string; href?: string }>("contact.directo");
+  return html`<footer class="site-footer">
+  <div class="container pie">
+    <div class="pie-marca">
+      <a class="marca" href="${inicio}" aria-label="${t("a11y.inicio")}">${marcaBarra()}</a>
+      <p>${t("footer.descripcion")}</p>
+      ${config.social.length ? html`<ul class="social" role="list">${config.social.map((s) => html`<li><a href="${s.url}" target="_blank" rel="noopener me"
+          aria-label="${s.label ?? networkName[s.network]}">${icon(s.network)}</a></li>`)}</ul>` : ""}
+    </div>
+    <nav class="pie-col pie-nav" aria-label="${t("footer.navegacion")}">
+      <h2>${t("footer.navegacion")}</h2>
+      <ul>${secciones.map((id) => html`<li><a href="${inicio}#${id}">${t(`clasica.nav.${id}`)}</a></li>`)}</ul>
+    </nav>
+    <div class="pie-col pie-servicios">
+      <h2>${t("footer.servicios")}</h2>
+      <ul>${servicios.map((s) => html`<li><a href="${inicio}#servicio-cl-${s.id}">${s.nombre}</a></li>`)}</ul>
+    </div>
+    <div class="pie-col pie-contacto">
+      <h2>${t("footer.contacto")}</h2>
+      <ul>
+        ${directo.map((d) => html`<li>${d.href ? html`<a href="${d.href}">${d.valor}</a>` : d.valor}</li>`)}
+        <li><a href="https://wa.me/573160978783" target="_blank" rel="noopener">${t("footer.whatsapp")} ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container pie-legal">
+    <p>© ${new Date().getFullYear()} ${config.name}. ${t("footer.rights")}</p>
+    <p><a href="${localePath(locale, "privacidad")}">${t("footer.privacidad")}</a> · ${t("footer.hecho")} · <a href="#main">${t("footer.arriba")} ↑</a></p>
+  </div>
+</footer>`;
+}
 
 export function layout({ ctx, body, css, js, lcpImage, inmersiva }: LayoutArgs) {
   const { locale, t, meta } = ctx;
@@ -86,16 +124,7 @@ ${inmersiva ? "" : html`
 <main id="main">
 ${body}
 </main>
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <p>© ${new Date().getFullYear()} ${config.name}. ${t("footer.rights")} · <a href="${localePath(locale, "privacidad")}">${t("footer.privacidad")}</a></p>
-    ${config.social.length ? html`
-    <ul class="social" role="list">
-      ${config.social.map((s) => html`<li><a href="${s.url}" target="_blank" rel="noopener me"
-          aria-label="${s.label ?? networkName[s.network]}">${icon(s.network)}</a></li>`)}
-    </ul>` : ""}
-  </div>
-</footer>
+${piePagina(ctx)}
 </body>
 </html>`;
 }

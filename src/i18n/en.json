@@ -58,11 +58,12 @@
       "3D design",
       "Mechanical design"
     ],
-    "bajar": "Scroll to enter the office",
     "fotoAlt": "The founders of JHS Software Solutions",
     "cargando": "Loading the 3D office",
     "error": "Your browser could not display the 3D office.",
-    "sin3d": "View the content without 3D"
+    "sin3d": "View the content without 3D",
+    "iniciar": "Press Enter to start",
+    "iniciarTactil": "Tap to start"
   },
   "menu": {
     "items": [
@@ -131,7 +132,8 @@
       "the map"
     ],
     "despues": "or use",
-    "teclas": "← ↑ → ↓ · Ctrl · Space · X"
+    "teclas": "← ↑ → ↓ · Ctrl · Space · X",
+    "movil": "Pick a section from the menu below"
   },
   "hud": {
     "abrir": "open",
@@ -305,7 +307,7 @@
         "nombre": "3D virtual office",
         "area": "Web development · 3D design",
         "cliente": "JHS Software Solutions, in-house project",
-        "anio": "[AÑO]",
+        "anio": "2026",
         "texto": "This very website: a 3D office you can walk through in the browser, with a guided camera, animated characters that walk around the furniture, and sections that open when you click on objects.",
         "lista": [
           "Modeling, texturing and lighting of the whole office",
@@ -319,7 +321,8 @@
           "Animation",
           "Optimization"
         ],
-        "servicio": "web"
+        "servicio": "web",
+        "portada": "/images/proyectos/oficina-3d.webp"
       },
       {
         "nombre": "SARA IoT",
@@ -627,7 +630,7 @@
       },
       {
         "dato": "Since",
-        "valor": "[AÑO DE FUNDACIÓN]"
+        "valor": "2026"
       }
     ],
     "experiencia": "Experience",
@@ -800,23 +803,137 @@
   "privacy": {
     "meta": {
       "title": "Privacy policy",
-      "description": "How JHS Software Solutions handles the personal data you share with us through the contact form on this website."
+      "description": "How JHS Software Solutions handles the personal data you share on this website, in accordance with Colombian Law 1581 of 2012."
     },
-    "title": "Privacy policy",
-    "volver": "Back to the office",
-    "paragraphs": [
-      "The data you send through the contact form (name, email and message) is used only to answer your request and is not shared with third parties.",
-      "You can review, update or ask us to delete your data by writing to forgesolutions123@gmail.com.",
-      "[Completa este texto con la política de tratamiento de datos de tu empresa. En Colombia aplica la Ley 1581 de 2012.]"
-    ]
+    "title": "Personal data processing policy",
+    "vigencia": "Effective as of October 24, 2026",
+    "intro": "At JHS Software Solutions we respect your privacy. This policy explains what personal data we collect on this website, what we use it for and how you can exercise your rights, in accordance with Colombian Law 1581 of 2012 and Decree 1377 of 2013.",
+    "secciones": [
+      {
+        "titulo": "1. Data controller",
+        "parrafos": [
+          "JHS Software Solutions, based in Bucaramanga, Santander, Colombia.",
+          "Email: forgesolutions123@gmail.com · Phone and WhatsApp: +57 316 097 8783."
+        ]
+      },
+      {
+        "titulo": "2. What data we collect",
+        "lista": [
+          "What you write in the contact form: name, email address, the service you are interested in and your message.",
+          "What you share with us if you contact us by email, phone or WhatsApp.",
+          "Basic technical data recorded by the hosting server when you visit the site (IP address, browser and pages visited), needed for the website to work and stay secure."
+        ],
+        "nota": "We do not ask for sensitive data or payment details, and we do not use advertising cookies or third-party tracking tools."
+      },
+      {
+        "titulo": "3. What we use it for",
+        "lista": [
+          "To answer your message and prepare the proposal or quote you request.",
+          "To keep in touch about the project you entrust to us.",
+          "To protect the site against abuse and automated submissions (spam)."
+        ],
+        "nota": "We do not sell or rent your data, and we do not use it to send you advertising without your consent."
+      },
+      {
+        "titulo": "4. Who we share it with",
+        "parrafos": [
+          "Only with the providers we need to run the site, acting as data processors:"
+        ],
+        "lista": [
+          "Web3Forms, which receives the contact form and forwards it to us by email.",
+          "Vercel, which hosts the website.",
+          "Google (Gmail), where we receive and answer emails."
+        ],
+        "nota": "These providers may store information outside Colombia, with appropriate security measures. We will also disclose data to an authority when required by law."
+      },
+      {
+        "titulo": "5. Storage in your browser",
+        "parrafos": [
+          "The site stores only two preferences in your own browser (local storage): your language and whether you prefer the 3D office or the classic view. They contain no personal data and you can delete them at any time from your browser settings."
+        ]
+      },
+      {
+        "titulo": "6. Your rights",
+        "parrafos": [
+          "As the data subject you may, at any time:"
+        ],
+        "lista": [
+          "Access, update and correct your data.",
+          "Request proof of the consent you gave us.",
+          "Find out how we have used it.",
+          "Withdraw your consent or ask us to delete your data, unless we have a legal or contractual duty to keep it.",
+          "File complaints with the Superintendence of Industry and Commerce (SIC) if you believe your rights have been violated."
+        ]
+      },
+      {
+        "titulo": "7. How to exercise them",
+        "parrafos": [
+          "Write to forgesolutions123@gmail.com with your name, your request and how you would like us to reply. We answer inquiries within ten (10) business days and claims within fifteen (15) business days, as required by law."
+        ]
+      },
+      {
+        "titulo": "8. Retention and security",
+        "parrafos": [
+          "We keep your data only as long as needed to handle your request and any business relationship that results from it, and for the periods required by law. We use reasonable technical and organizational measures to protect it against loss, unauthorized access or use; the site is always served over an encrypted connection (HTTPS)."
+        ]
+      },
+      {
+        "titulo": "9. Minors",
+        "parrafos": [
+          "This site is intended for businesses and adults. We do not knowingly collect data from children under 18."
+        ]
+      },
+      {
+        "titulo": "10. Consent and changes",
+        "parrafos": [
+          "By submitting the form or contacting us, you authorize us to process your data under this policy. If we change it, we will publish the new version on this page with its effective date."
+        ]
+      }
+    ],
+    "volver": "Back to home"
   },
   "footer": {
     "rights": "All rights reserved.",
-    "privacidad": "Privacy"
+    "privacidad": "Privacy policy",
+    "descripcion": "Technology and engineering studio in Bucaramanga, Colombia. Software, artificial intelligence, connected devices and design, with the same team from start to finish.",
+    "navegacion": "Navigation",
+    "servicios": "Services",
+    "contacto": "Contact",
+    "whatsapp": "WhatsApp",
+    "hecho": "Made in Bucaramanga, Colombia",
+    "arriba": "Back to top"
   },
   "notFound": {
     "title": "Page not found",
     "text": "The page you are looking for does not exist or has been moved.",
     "back": "Back to the office"
+  },
+  "clasica": {
+    "nav": {
+      "nosotros": "About us",
+      "servicios": "Services",
+      "portafolio": "Portfolio",
+      "tecnologias": "Technologies",
+      "contacto": "Contact"
+    },
+    "ver3d": "View in 3D",
+    "sin3d": "View without 3D",
+    "verServicios": "See services",
+    "nosotros": {
+      "titulo": "One team, from idea to product",
+      "experiencia": "See experience"
+    },
+    "servicios": {
+      "titulo": "What we build for you",
+      "lead": "Software, artificial intelligence, connected devices and design, tailored to your business. The code and the complete project are yours."
+    },
+    "portafolio": {
+      "titulo": "Projects already up and running",
+      "lead": "Apps, platforms and websites we designed and built from start to finish."
+    },
+    "contacto": {
+      "lead": "Tell us your idea and we'll get back to you with a proposal. You can also write to us directly.",
+      "whatsapp": "Message us on WhatsApp"
+    }
   }
 }
